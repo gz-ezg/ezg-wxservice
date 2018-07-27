@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <van-row style="overflow-x: hidden">
       <router-view/>
+    </van-row>
   </div>
 </template>
 
@@ -21,5 +23,8 @@ export default {
   /* text-align: center; */
   color: #2c3e50;
   /* margin-top: 60px; */
+}
+.van-nav-bar .van-icon {
+  color: white;
 }
 </style>

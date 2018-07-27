@@ -12,7 +12,11 @@ import Router from 'vue-router'
 
 import login from 'base/login/login'
 import mobileBind from 'base/login/bindMobile'
+import complain from 'base/common/complain'
+
 import serviceCenterIndex from 'base/serviceCenter/main'
+
+import bookKeepingAgeny from 'base/serviceCenter/bookKeepingAgency'
 
 
 Vue.use(Router)
@@ -26,10 +30,16 @@ export default new Router({
     //   component: getUserInfo
     // },
     {
+      path:'/complain',
+      name:'complain',
+      component: complain
+    },
+    {
       path:'/servicecenterindex',
       name:'serviceCenterIndex',
       component: serviceCenterIndex
     },
+
     {
       path:'/login',
       name: 'login',
@@ -40,8 +50,14 @@ export default new Router({
       name: 'mobileBind',
       component: mobileBind
     },
+
     {
-      path: '/:id',
+      path:'/bookkeepingageny',
+      name: 'bookKeepingAgeny',
+      component: bookKeepingAgeny
+    },
+    {
+      path: '/',
       redirect: {
         name:'serviceCenterIndex'
       }

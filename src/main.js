@@ -18,16 +18,13 @@ Vue.use(VueBus)
 
 axios.interceptors.response.use(
     (response) => {
-        // let _self = this
-        // console.log(response.data.msgCode)
-        // console.log("这是拦截器弹出的！")
-        if(response.data.msgCode == "50003" && Cookies.get('user')!=""){
+        if(response.data.msgCode == "50003"){
 
+        }else if(response.data.msgCode == '60000'){
+
+		}else{
+          	return response;
         }
-      	if(response.data.msgCode == '60000'){
-
-	  	}
-      return response;
 	},
   	(error) => {
 		return Promise.reject(error)
