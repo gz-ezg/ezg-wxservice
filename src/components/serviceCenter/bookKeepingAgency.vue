@@ -141,3 +141,11 @@ export default {
 }
 </script>
 
+<style scoped>
+.van-step--finish{
+  color:red
+}
+/* .van-step--finish .van-step__line{
+  background-color: red
+} */
+</style>
