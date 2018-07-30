@@ -31,7 +31,7 @@
       </van-row>
       <van-row style="margin-top:5px">
         <van-col span="14">服务不满意？<a href="/#/complain">我要投诉</a></van-col>
-        <van-col span="10" style="font-size:10px;text-align:right;line-height:19px"><van-icon name="info-o" style="line-height:17px"/> 做账资料注意事项</van-col>
+        <van-col span="10" style="font-size:10px;text-align:right;line-height:17px"><van-icon name="info-o" style="line-height:1px"/> 做账资料注意事项</van-col>
       </van-row>
     </van-row>
 
@@ -39,8 +39,8 @@
       <van-step v-for="item in workOrderList" :key="item.id">
         <van-row>
           <van-col span="6" >{{item.month}}</van-col>
-          <van-col span="5" ><span style="line-height:18px" @click="open_baoshui(item)">报税 <van-icon name="passed" v-if="item.baoshui" style="font-size:14px;color:#00EE00;line-height:16px"/><van-icon name="clock" v-if="!item.baoshui" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="5" ><span style="line-height:18px" @click="open_zuozhang(item)">做账 <van-icon name="passed" v-if="item.zuozhang" style="font-size:14px;color:#00EE00;line-height:16px"/><van-icon name="clock" v-if="!item.zuozhang" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" @click="open_baoshui(item)">报税 <van-icon name="passed" v-if="item.baoshui" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="!item.baoshui" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" @click="open_zuozhang(item)">做账 <van-icon name="passed" v-if="item.zuozhang" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="!item.zuozhang" style="font-size:14px;line-height:16px"/></span></van-col>
           <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px">风险评估报告</span></van-col>
         </van-row>
       </van-step>

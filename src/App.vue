@@ -27,4 +27,7 @@ export default {
 .van-nav-bar .van-icon {
   color: white;
 }
+.van-icon::before {
+  vertical-align: middle
+}
 </style>
