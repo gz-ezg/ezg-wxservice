@@ -31,7 +31,7 @@
       </van-row>
       <van-row style="margin-top:5px">
         <van-col span="14">服务不满意？<a href="/#/complain">我要投诉</a></van-col>
-        <van-col span="10" style="font-size:10px;text-align:right;line-height:17px"><van-icon name="info-o" style="line-height:1px"/> 做账资料注意事项</van-col>
+        <van-col span="10" style="font-size:10px;text-align:right;line-height:17px"><van-icon name="info-o" style="line-height:1px"/> <a href="https://mp.weixin.qq.com/s/W25DatAlyJIchb7-O74Myw">做账资料注意事项</a></van-col>
       </van-row>
     </van-row>
 
@@ -131,7 +131,8 @@ export default {
     },
     open_zuozhang(e){
       console.log(e)
-    }
+    },
+
   },
   mounted(){
     for(let i=0;i<2;i++){

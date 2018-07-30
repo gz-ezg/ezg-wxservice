@@ -34,9 +34,37 @@
 export default {
   data(){
     return{
-      isLogin:true,
+      isLogin:false,
       mobile: "",
       yzm: ""
+    }
+  },
+  methods:{
+    login(){
+      let _self = this
+      let url = `api/store/mobile/user/login`
+      let config = {
+        mobile: _self.mobile,
+        code: _self.yzm
+      }
+
+      function success(res){
+        console.log(res)
+        localStorage.setItem("customerId",res.data.data.customer_id)
+        _self.$router.push({
+          name:'serviceCenterIndex',
+          params:{
+            id: res.data.data.customer_id
+          }
+        })
+      }
+
+      function fail(err){
+        console.error(err)
+        _self.$toast.fail("登录失败！")
+      }
+
+      this.$Post(url, config, success, fail)
     }
   }
 }

@@ -50,13 +50,13 @@ Vue.prototype.$Get = function(url,config,success,fail){
     	}
   	}).catch(function(err){
 		  console.error(err)
-		  fail(res)
+		  fail(err)
 	})
 }
 
 //	公用post请求
 Vue.prototype.$Post = function(url,config,success,fail){
-	this.$http.get(url, config).then(function(res){
+	this.$http.post(url, config).then(function(res){
 	  if(res.data.msgCode == "40000"){
 			console.log(res)
 			success(res)
@@ -66,7 +66,7 @@ Vue.prototype.$Post = function(url,config,success,fail){
 	  }
 	}).catch(function(err){
 		console.error(err)
-		fail(res)
+		fail(err)
   })
 }
 

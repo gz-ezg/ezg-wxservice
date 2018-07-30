@@ -17,6 +17,11 @@ import complain from 'base/common/complain'
 import serviceCenterIndex from 'base/serviceCenter/main'
 
 import bookKeepingAgeny from 'base/serviceCenter/bookKeepingAgency'
+import dymaic from 'base/serviceCenter/dymaic'
+import dataMemo from 'base/serviceCenter/dataMemo'
+
+import zuoZhang from 'base/serviceCenter/zuozhang'
+import baoShui from 'base/serviceCenter/baoshui'
 
 
 Vue.use(Router)
@@ -35,7 +40,7 @@ export default new Router({
       component: complain
     },
     {
-      path:'/servicecenterindex',
+      path:'/servicecenterindex/:id',
       name:'serviceCenterIndex',
       component: serviceCenterIndex
     },
@@ -57,9 +62,29 @@ export default new Router({
       component: bookKeepingAgeny
     },
     {
+      path: '/dymaic/:workOrderId',
+      name: 'dymaic',
+      component: dymaic
+    },
+    {
+      path: '/dataMemo',
+      name: 'dataMemo',
+      component: dataMemo
+    },
+    {
+      path: '/zuozhang',
+      name: 'zuozhang',
+      component: zuoZhang
+    },
+    {
+      path: '/baoshui',
+      name: 'baoshui',
+      component: baoShui
+    },
+    {
       path: '/',
       redirect: {
-        name:'serviceCenterIndex'
+        name:'login'
       }
     },
     // 采用history模式，配置全局路由

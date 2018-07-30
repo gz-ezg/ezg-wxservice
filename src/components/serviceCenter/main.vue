@@ -2,7 +2,7 @@
   <div>
     <van-row style="padding-bottom:45px">
       <van-row style="padding: 10px; background-color: #CC3300; border-bottom: 1px solid white;" >
-        <center style="margin-left: 2%; color: white;font-weight:bold;" @click="openSelect">{{showCompanyName}}</center>
+        <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}</center>
       </van-row>
       <div style="height:150px;padding: 10px; background-color: #CC3300; border-bottom: 1px solid #eeeeee;color: white" >
         <van-row>
@@ -62,11 +62,11 @@
                 <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
                   <van-row>
                     <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item)" /></van-col>
+                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
                   </van-row>
                   <van-row>
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.process}}</span></van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.finishTime}}</van-col>
+                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.CurrentProcess}}</span></van-col>
+                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
                   </van-row>
                 </van-row>
             </div>
@@ -77,11 +77,11 @@
                 <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
                   <van-row>
                     <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item)" /></van-col>
+                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
                   </van-row>
-                  <van-row>
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.process}}</span></van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.finishTime}}</van-col>
+                  <van-row style="margin-top:5px">
+                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.CurrentProcess}}</span></van-col>
+                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
                   </van-row>
                 </van-row>
             </div>
@@ -96,9 +96,9 @@
     >
       <van-radio-group v-model="select_company_id">
         <van-cell-group>
-          <van-cell v-for="item in companyList" :key="item.id" clickable @click="choose(item)">
-            <van-col span="22"><div>{{item.name}}</div></van-col>
-            <van-col span="2"><van-radio :name="item.id" /></van-col>
+          <van-cell v-for="item in companyList" :key="item.id" clickable @click="choose(item)" >
+            <van-col span="22" style="height:30px;line-height:30px"><div>{{item.companyname}}</div></van-col>
+            <van-col span="2"><van-radio :name="item.id" style="height:30px"/></van-col>
           </van-cell>
         </van-cell-group>
       </van-radio-group>
@@ -125,82 +125,27 @@ export default {
       select_company: false,
       showCompanyName: "无",
       select_company_id:"",
-      companyList:[
-        {
-          name:"广州则为科技有限公司",
-          id:50111
-        },
-        {
-          name:"广州则科技有限公司",
-          id:50112
-        },
-        {
-          name:"广州科技有限公司",
-          id:50113
-        }
-      ],
-      commercialWorkOrder:[
-        {
-          id:123,
-          product:"工商变更",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        },
-        {
-          id:124,
-          product:"工商变更3",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        },
-        {
-          id:125,
-          product:"工商变更4",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        }
-      ],
-      planWorkOrder:[
-        {
-          id:123,
-          product:"工商变更",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        },
-        {
-          id:124,
-          product:"工商变更3",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        },
-        {
-          id:125,
-          product:"工商变更4",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        },
-        {
-          id:126,
-          product:"工商变更1",
-          process:"税务登记",
-          finishTime:"2018-07-01"
-        }
-      ]
+      companyList:[],
+      commercialWorkOrder:[],
+      planWorkOrder:[]
     }
   },
   methods:{
-    getDate(){
+    get_date(){
       let date = new Date()
       this.year = date.getFullYear()
       this.month = date.getMonth() + 1
     },
-    openSelect(){
+    open_select(){
       this.select_company = true
     },
     //  选择公司名称
     choose(e){
-      this.showCompanyName = e.name
+      this.showCompanyName = e.companyname
       this.select_company_id = e.id
       this.select_company = false
+      localStorage.setItem("companyName",this.showCompanyName)
+      this.get_data()
     },
     //  打开服务详情
     open_detail(){
@@ -214,11 +159,71 @@ export default {
     },
     //  打开工单详情
     open_workorder_detail(e){
-      console.log(e)
+      this.$router.push({
+        name:"dymaic",
+        params:{
+          workOrderId: e
+        }
+      })
+    },
+    get_company_list(){
+      let _self = this
+      let url = `api/store/customer/company/list`
+      let config = {}
+
+      function success(res){
+        console.log(res.data.data)
+        _self.companyList = res.data.data
+        if(res.data.data){
+          _self.showCompanyName = res.data.data[0].companyname
+          _self.select_company_id = res.data.data[0].id
+          localStorage.setItem("companyName",_self.showCompanyName)
+          _self.get_data()
+        }
+      }
+
+      function fail(err){
+        console.log(err)
+      }
+
+      this.$Get(url, config, success, fail)
+    },
+    get_data(){
+      this.commercialWorkOrder = []
+      this.planWorkOrder = []
+      let _self = this
+      let url = `api/store/customer/company/work/order/list`
+      let config = {
+        params:{
+          companyId: _self.select_company_id
+        }
+      }
+
+      function success(res){
+        console.log(res.data.data)
+        if(res.data.data.BUSSINESS){
+          _self.commercialWorkOrder = res.data.data.BUSSINESS
+          for(let i = 0;i<_self.commercialWorkOrder.length;i++){
+            if(_self.commercialWorkOrder[i].service_end_time){
+              _self.commercialWorkOrder[i].service_end_time = _self.commercialWorkOrder[i].service_end_time.slice(0,10)
+            }
+          }
+        }
+        if(res.data.data.PLAN){
+          _self.planWorkOrder = res.data.data.planWorkOrder
+        }
+      }
+
+      function fail(err){
+        console.log(err)
+      }
+
+      this.$Get(url, config, success, fail)
     }
   },
   created(){
-    this.getDate()
+    this.get_company_list()
+    this.get_date()
   }
 }
 </script>

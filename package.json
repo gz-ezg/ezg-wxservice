@@ -7,11 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.226",
     "dev2": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.220",
-<<<<<<< HEAD
     "dev3": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.1.4",
-=======
-    "dev3": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.1.7",
->>>>>>> 194867ae27844529c35a1d0b28634f453c5a0308
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
