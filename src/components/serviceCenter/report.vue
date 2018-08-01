@@ -1,0 +1,60 @@
+<template>
+  <div>
+    <van-nav-bar
+      style="background-color: #CC3300;color:white"
+      title="企业评估报告"
+      left-arrow
+      @click-left="$backTo()"
+    />
+    <div>
+      <h4 style="padding-left:20px">{{companyname}}：</h4>
+      <van-row style="padding:20px;padding-top:0px">
+        <p>东家您好,您的{{year}}年{{month}}账期的评估报告如下：</p>
+        <p v-for="(item, index) in report" :key="index" style="text-indent:30px;line-height:200%">{{index+1}}.{{item.base_message}}</p>
+      </van-row>
+      </div>
+      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">联系管家获得完整解决方案</van-button>
+  </div>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      report:[],
+      companyname:""
+    }
+  },
+  methods:{
+    init(){
+      console.log(this.$route)
+      let _self = this
+      let url = `api/store/customer/company/analysis/result`
+      let config = {
+        params:{
+          companyId: _self.$route.params.companyid,
+          period: _self.$route.params.period
+        }
+      }
+
+      function success(res){
+        _self.report = res.data.data
+      }
+
+      function fail(err){
+
+      }
+
+      this.$Get(url, config, success, fail)
+    }
+  },
+  created(){
+    let _self = this
+    this.init()
+    this.companyname = localStorage.getItem("companyName")
+    this.year = this.$route.params.period.slice(0,4)
+    this.month = this.$route.params.period.slice(4)
+  }
+}
+</script>
+

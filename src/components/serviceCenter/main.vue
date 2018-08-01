@@ -17,7 +17,7 @@
           <van-row style="margin-top:30px">
               <center>
                 <div style="font-size:16px;padding-bottom:10px">月净利润(元)</div>
-                <div style="font-size:35px">12345556.55</div>
+                <div style="font-size:35px">{{accountTotal.yuelirun}}</div>
               </center>
             </van-row>
         </van-row>
@@ -26,25 +26,25 @@
         <van-col span="6">
           <center>
             <div>月收入(元)</div>
-            <div>356669.00</div>
+            <div>{{accountTotal.yueshouru}}</div>
           </center>
         </van-col>
         <van-col span="6">
           <center>
             <div>货币资金(元)</div>
-            <div>356669.00</div>
+            <div>{{accountTotal.huobizijin}}</div>
           </center>
         </van-col>
         <van-col span="6">
           <center>
             <div>成本费用(元)</div>
-            <div>356669.00</div>
+            <div>{{accountTotal.chengbenfeiyong}}</div>
           </center>
         </van-col>
         <van-col span="6">
           <center>
             <div>税金(元)</div>
-            <div>356669.00</div>
+            <div>{{accountTotal.shuijin}}</div>
           </center>
         </van-col>
       </van-row>
@@ -127,14 +127,31 @@ export default {
       select_company_id:"",
       companyList:[],
       commercialWorkOrder:[],
-      planWorkOrder:[]
+      planWorkOrder:[],
+      accountTotal:{
+        huobizijin:0,
+        shuijin:0,
+        yuelirun:0,
+        qitashuifei:0,
+        yueshouru:0,
+        chengbenfeiyong:0,
+        qiyesuodeshui:0,
+        gerensuodeshui:0
+      }
     }
   },
   methods:{
     get_date(){
       let date = new Date()
       this.year = date.getFullYear()
-      this.month = date.getMonth() + 1
+      this.month = date.getMonth()
+      if(this.month == 0){
+        this.year = this.year - 1
+        this.month = 12
+      }
+      if(this.month<=10){
+        this.month = "0"+this.month
+      }
     },
     open_select(){
       this.select_company = true
@@ -149,13 +166,25 @@ export default {
     },
     //  打开服务详情
     open_detail(){
+      let _self = this
       this.$router.push({
-        name:'bookKeepingAgeny'
+        name:'bookKeepingAgeny',
+        params:{
+          companyid:_self.select_company_id
+        }
       })
     },
     //  打开企业风险评估
     open_report(){
-
+      let _self = this
+      let period = _self.year + _self.month
+      this.$router.push({
+        name:"report",
+        params:{
+          companyid: _self.select_company_id,
+          period: period
+        }
+      })
     },
     //  打开工单详情
     open_workorder_detail(e){
@@ -172,11 +201,12 @@ export default {
       let config = {}
 
       function success(res){
-        console.log(res.data.data)
+        // console.log(res.data.data)
         _self.companyList = res.data.data
         if(res.data.data){
           _self.showCompanyName = res.data.data[0].companyname
           _self.select_company_id = res.data.data[0].id
+          _self.get_account()
           localStorage.setItem("companyName",_self.showCompanyName)
           _self.get_data()
         }
@@ -200,7 +230,7 @@ export default {
       }
 
       function success(res){
-        console.log(res.data.data)
+        // console.log(res.data.data)
         if(res.data.data.BUSSINESS){
           _self.commercialWorkOrder = res.data.data.BUSSINESS
           for(let i = 0;i<_self.commercialWorkOrder.length;i++){
@@ -219,11 +249,36 @@ export default {
       }
 
       this.$Get(url, config, success, fail)
+    },
+    get_account(){
+      let _self = this
+      let url = `api/store/customer/company/account/report`
+      let temp = _self.year + _self.month
+      let config = {
+        params:{
+          companyId: _self.select_company_id,
+          period: temp
+        }
+      }
+
+      function success(res){
+        console.log(res)
+        _self.accountTotal = res.data
+      }
+
+      function fail(err){
+        _self.$toast.fail(err.data.msg)
+      }
+
+      this.$Get(url, config, success, fail)
     }
   },
   created(){
     this.get_company_list()
     this.get_date()
+  },
+  watch:{
+    'select_company_id':'get_account'
   }
 }
 </script>

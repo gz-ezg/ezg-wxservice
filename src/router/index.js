@@ -22,7 +22,7 @@ import dataMemo from 'base/serviceCenter/dataMemo'
 
 import zuoZhang from 'base/serviceCenter/zuozhang'
 import baoShui from 'base/serviceCenter/baoshui'
-
+import report from 'base/serviceCenter/report'
 
 Vue.use(Router)
 
@@ -40,7 +40,7 @@ export default new Router({
       component: complain
     },
     {
-      path:'/servicecenterindex/:id',
+      path:'/servicecenterindex',
       name:'serviceCenterIndex',
       component: serviceCenterIndex
     },
@@ -57,7 +57,7 @@ export default new Router({
     },
 
     {
-      path:'/bookkeepingageny',
+      path:'/bookkeepingageny/:companyid',
       name: 'bookKeepingAgeny',
       component: bookKeepingAgeny
     },
@@ -80,6 +80,11 @@ export default new Router({
       path: '/baoshui',
       name: 'baoshui',
       component: baoShui
+    },
+    {
+      path: '/report/:companyid/:period',
+      name: 'report',
+      component: report
     },
     {
       path: '/',

@@ -36,11 +36,11 @@
     </van-row>
 
     <van-steps direction="vertical" :active="activeIndex" active-color="#f60">
-      <van-step v-for="item in workOrderList" :key="item.id">
+      <van-step v-for="(item, index) in workOrderList" :key="index">
         <van-row>
-          <van-col span="6" >{{item.month}}</van-col>
-          <van-col span="5" ><span style="line-height:21px" @click="open_baoshui(item)">报税 <van-icon name="passed" v-if="item.baoshui" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="!item.baoshui" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="5" ><span style="line-height:21px" @click="open_zuozhang(item)">做账 <van-icon name="passed" v-if="item.zuozhang" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="!item.zuozhang" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="6" >{{item.period}}</van-col>
+          <van-col span="5" ><span style="line-height:21px" @click="open_baoshui(item)">报税 <van-icon name="passed" v-if="item.BS=='Y'" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="item.BS!='Y'" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" @click="open_zuozhang(item)">做账 <van-icon name="passed" v-if="item.JZ=='Y'" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="item.JZ!='Y'" style="font-size:14px;line-height:16px"/></span></van-col>
           <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px">风险评估报告</span></van-col>
         </van-row>
       </van-step>
@@ -53,60 +53,60 @@ export default {
   data(){
     return{
       workOrderList:[
-        {
-          id:1,
-          month:201807,
-          zuozhang:"",
-          baoshui:"2018-07-22"
-        },
-        {
-          id:2,
-          month:201808,
-          zuozhang:"2018-07-22",
-          baoshui:""
-        },
-        {
-          id:3,
-          month:201809,
-          zuozhang:"2018-07-22",
-          baoshui:"2018-07-22"
-        },
-        {
-          id:4,
-          month:201807,
-          zuozhang:"",
-          baoshui:"2018-07-22"
-        },
-        {
-          id:5,
-          month:201808,
-          zuozhang:"2018-07-22",
-          baoshui:""
-        },
-        {
-          id:6,
-          month:201809,
-          zuozhang:"2018-07-22",
-          baoshui:"2018-07-22"
-        },
-        {
-          id:7,
-          month:201807,
-          zuozhang:"",
-          baoshui:"2018-07-22"
-        },
-        {
-          id:8,
-          month:201808,
-          zuozhang:"2018-07-22",
-          baoshui:""
-        },
-        {
-          id:9,
-          month:201809,
-          zuozhang:"2018-07-22",
-          baoshui:"2018-07-22"
-        },
+        // {
+        //   id:1,
+        //   month:201807,
+        //   zuozhang:"",
+        //   baoshui:"2018-07-22"
+        // },
+        // {
+        //   id:2,
+        //   month:201808,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:""
+        // },
+        // {
+        //   id:3,
+        //   month:201809,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:"2018-07-22"
+        // },
+        // {
+        //   id:4,
+        //   month:201807,
+        //   zuozhang:"",
+        //   baoshui:"2018-07-22"
+        // },
+        // {
+        //   id:5,
+        //   month:201808,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:""
+        // },
+        // {
+        //   id:6,
+        //   month:201809,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:"2018-07-22"
+        // },
+        // {
+        //   id:7,
+        //   month:201807,
+        //   zuozhang:"",
+        //   baoshui:"2018-07-22"
+        // },
+        // {
+        //   id:8,
+        //   month:201808,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:""
+        // },
+        // {
+        //   id:9,
+        //   month:201809,
+        //   zuozhang:"2018-07-22",
+        //   baoshui:"2018-07-22"
+        // },
       ],
       finish:true,
       activeIndex: 0,
@@ -132,12 +132,34 @@ export default {
     open_zuozhang(e){
       console.log(e)
     },
+    init(){
+      let _self = this
+      let url = `api/store/customer/company/showCompanyProgressInfo`
+      let config = {
+        params:{
+          // companyId:_self.$route.params.companyid
+          companyId:33927
+        }
+      }
+
+      function success(res){
+        console.log(res)
+        _self.workOrderList = res.data.data.detail
+      }
+
+      function fail(err){
+      }
+
+      this.$Get(url, config, success, fail)
+    }
 
   },
+  created(){
+    let _self = this
+    this.companyName = localStorage.getItem("companyName")
+  },
   mounted(){
-    for(let i=0;i<2;i++){
-      this.activeIndex++
-    }
+
   }
 }
 </script>

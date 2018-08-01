@@ -45,7 +45,7 @@ Vue.prototype.$Get = function(url,config,success,fail){
       		console.log(res)
       		success(res)
     	}else{
-      		console.warn(res)
+          console.warn(res)
       		fail(res)
     	}
   	}).catch(function(err){
