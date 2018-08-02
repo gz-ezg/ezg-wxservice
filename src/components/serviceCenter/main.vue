@@ -257,13 +257,13 @@ export default {
       let config = {
         params:{
           companyId: _self.select_company_id,
-          period: temp
+          // period: temp
         }
       }
 
       function success(res){
-        console.log(res)
-        _self.accountTotal = res.data
+        console.log(res.data.data)
+        _self.accountTotal = res.data.data
       }
 
       function fail(err){

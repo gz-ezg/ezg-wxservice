@@ -46,6 +46,24 @@ export default {
       }
 
       this.$Get(url, config, success, fail)
+    },
+    submit(){
+      let _self = this
+      let url = `api/store/customer/ask/help`
+
+      let config = {
+        companyId: _self.$route.params.companyid,
+      }
+
+      function success(res){
+
+      }
+
+      function fail(err){
+
+      }
+
+      this
     }
   },
   created(){

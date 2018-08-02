@@ -2,7 +2,7 @@
   <van-row>
     <van-nav-bar
       style="background-color: #CC3300;color:white"
-      :title="title"
+      :title="detail.product"
       left-arrow
       @click-left="$backTo()"
     />
@@ -16,13 +16,13 @@
       <van-row style="border-bottom:1px solid #999;padding-bottom:5px">
         <van-col span="18">
           <van-row>
-            服务会计：{{serviceName}}
+            服务会计：{{detail.realname}}
           </van-row>
           <van-row>
             联系方式：{{tel}}
           </van-row>
           <van-row>
-            服务税期：{{serviceRange}}
+            服务税期：{{detail.begin_period}}至{{detail.end_period}}
           </van-row>
         </van-col>
         <van-col span="6">
@@ -52,69 +52,21 @@
 export default {
   data(){
     return{
-      workOrderList:[
-        // {
-        //   id:1,
-        //   month:201807,
-        //   zuozhang:"",
-        //   baoshui:"2018-07-22"
-        // },
-        // {
-        //   id:2,
-        //   month:201808,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:""
-        // },
-        // {
-        //   id:3,
-        //   month:201809,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:"2018-07-22"
-        // },
-        // {
-        //   id:4,
-        //   month:201807,
-        //   zuozhang:"",
-        //   baoshui:"2018-07-22"
-        // },
-        // {
-        //   id:5,
-        //   month:201808,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:""
-        // },
-        // {
-        //   id:6,
-        //   month:201809,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:"2018-07-22"
-        // },
-        // {
-        //   id:7,
-        //   month:201807,
-        //   zuozhang:"",
-        //   baoshui:"2018-07-22"
-        // },
-        // {
-        //   id:8,
-        //   month:201808,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:""
-        // },
-        // {
-        //   id:9,
-        //   month:201809,
-        //   zuozhang:"2018-07-22",
-        //   baoshui:"2018-07-22"
-        // },
-      ],
-      finish:true,
+      detail:{
+        begin_period:"",
+        companyname:"",
+        cycle_work_order_id:"",
+        end_period:"",
+        mobilePhone:"",
+        product:"无",
+        realname:"",
+        service_record_id:"",
+        skuname:""
+      },
+      workOrderList:[],
+      // finish:true,
       activeIndex: 0,
       tel: 13580328323,
-      title: "一般纳税人代理记账",
-      companyName: "广州则为信息科技有限公司",
-      serviceName: "胡小红",
-      serviceRange: "2018-05至2019-05"
     }
   },
   computed:{
@@ -145,9 +97,38 @@ export default {
       function success(res){
         console.log(res)
         _self.workOrderList = res.data.data.detail
+        for(let i = 0;i<_self.workOrderList.length;i++){
+          if(_self.workOrderList[i].BS == "Y" && _self.workOrderList[i].JZ == "Y"){
+            _self.activeIndex = i
+          }
+        }
       }
 
       function fail(err){
+      }
+
+      this.$Get(url, config, success, fail)
+    },
+    get_base_info(){
+      let _self = this
+      let url = `api/store/customer/company/companyServiceInfo`
+
+      let config = {
+        params:{
+          // companyId:_self.$route.params.companyid
+          companyId:33927
+        }
+      }
+
+      function success(res){
+        console.log("1111111111")
+        console.log(res.data.data[0])
+        _self.tel = res.data.data[0].mobilePhone
+        _self.detail = res.data.data[0]
+      }
+
+      function fail(err){
+        console.log(err)
       }
 
       this.$Get(url, config, success, fail)
@@ -157,6 +138,8 @@ export default {
   created(){
     let _self = this
     this.companyName = localStorage.getItem("companyName")
+    this.get_base_info()
+    this.init()
   },
   mounted(){
 

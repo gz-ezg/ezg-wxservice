@@ -35,7 +35,7 @@ export default new Router({
     //   component: getUserInfo
     // },
     {
-      path:'/complain',
+      path:'/complain/:id/:product',
       name:'complain',
       component: complain
     },
