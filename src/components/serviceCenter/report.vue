@@ -12,8 +12,16 @@
         <p>东家您好,您的{{year}}年{{month}}账期的评估报告如下：</p>
         <p v-for="(item, index) in report" :key="index" style="text-indent:30px;line-height:200%">{{index+1}}.{{item.base_message}}</p>
       </van-row>
-      </div>
-      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">联系管家获得完整解决方案</van-button>
+    </div>
+    <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">联系管家获得完整解决方案</van-button>
+    <van-dialog
+      title=""
+      v-model="show"
+      message="您的专属顾问会尽快与您联系！"
+      show-confirm-button
+      :before-close="beforeClose"
+    >
+    </van-dialog>
   </div>
 </template>
 
@@ -21,6 +29,7 @@
 export default {
   data(){
     return{
+      show:false,
       report:[],
       companyname:""
     }
@@ -56,14 +65,14 @@ export default {
       }
 
       function success(res){
-
+        _self.show = true
       }
 
       function fail(err){
-
+        console.log(err)
       }
 
-      this
+      this.$Post(url, config, success, fail)
     }
   },
   created(){

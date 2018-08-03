@@ -30,7 +30,7 @@
         </van-col>
       </van-row>
       <van-row style="margin-top:5px">
-        <van-col span="14">服务不满意？<a href="/#/complain">我要投诉</a></van-col>
+        <van-col span="14">服务不满意？<a href="" @click="open_complain">我要投诉</a></van-col>
         <van-col span="10" style="font-size:10px;text-align:right;line-height:17px"><van-icon name="info-o" style="line-height:1px"/> <a href="https://mp.weixin.qq.com/s/W25DatAlyJIchb7-O74Myw">做账资料注意事项</a></van-col>
       </van-row>
     </van-row>
@@ -67,6 +67,7 @@ export default {
       // finish:true,
       activeIndex: 0,
       tel: 13580328323,
+      companyName: "无",
     }
   },
   computed:{
@@ -75,14 +76,44 @@ export default {
     }
   },
   methods:{
+    open_complain(){
+      let _self = this
+      this.$router.push({
+        name:'complain',
+        params:{
+          id: _self.detail.cycle_work_order_id,
+          product: _self.detail.product
+        }
+      })
+    },
     open_report(e){
-      console.log(e)
+      this.$router.push({
+        name: 'report',
+        params:{
+          companyid: _self.$route.params.companyid,
+          period: e.period
+        }
+      })
     },
     open_baoshui(e){
-      console.log(e)
+      let _self = this
+      this.$router.push({
+        name: 'baoshui',
+        params:{
+          companyid: _self.$route.params.companyid,
+          period: e.period
+        }
+      })
     },
     open_zuozhang(e){
-      console.log(e)
+      let _self = this
+      this.$router.push({
+        name: 'zuozhang',
+        params:{
+          companyid: _self.$route.params.companyid,
+          period: e.period
+        }
+      })
     },
     init(){
       let _self = this
@@ -121,14 +152,14 @@ export default {
       }
 
       function success(res){
-        console.log("1111111111")
-        console.log(res.data.data[0])
+        // console.log("1111111111")
+        // console.log(res.data.data[0])
         _self.tel = res.data.data[0].mobilePhone
         _self.detail = res.data.data[0]
       }
 
       function fail(err){
-        console.log(err)
+        // console.log(err)
       }
 
       this.$Get(url, config, success, fail)

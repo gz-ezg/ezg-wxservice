@@ -23,6 +23,8 @@ import dataMemo from 'base/serviceCenter/dataMemo'
 import zuoZhang from 'base/serviceCenter/zuozhang'
 import baoShui from 'base/serviceCenter/baoshui'
 import report from 'base/serviceCenter/report'
+import table from 'base/serviceCenter/table'
+
 
 Vue.use(Router)
 
@@ -72,14 +74,19 @@ export default new Router({
       component: dataMemo
     },
     {
-      path: '/zuozhang',
+      path: '/zuozhang/:companyid/:period',
       name: 'zuozhang',
       component: zuoZhang
     },
     {
-      path: '/baoshui',
+      path: '/baoshui/:companyid/:period',
       name: 'baoshui',
       component: baoShui
+    },
+    {
+      path: '/table/:companyid/:period/:type',
+      name: 'table',
+      component: table
     },
     {
       path: '/report/:companyid/:period',

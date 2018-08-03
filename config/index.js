@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {
         '/api': {
             // target: 'http://zonewx.zgcfo.com/api/',
-            // target: 'http://192.168.0.220:9000',
-            target: 'http://192.168.0.224:9000',
+            target: 'http://192.168.0.220:9000',
+            // target: 'http://192.168.0.224:9000',
             changeOrigin: true,
             secure: false,
             pathRewrite: {
@@ -62,7 +62,7 @@ module.exports = {
 
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
-    devtool: '#source-map',
+    // devtool: '#source-map',
 
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
