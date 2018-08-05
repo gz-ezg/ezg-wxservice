@@ -28,7 +28,7 @@
     >
     </van-dialog>
 
-      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">提交</van-button>
+      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="before">提交</van-button>
   </van-row>
 </template>
 
@@ -43,6 +43,13 @@ export default {
     }
   },
   methods:{
+    before(){
+      if(this.content == ""){
+        this.$toast.fail("请输入投诉内容！")
+      }else{
+        this.submit()
+      }
+    },
     submit(){
       let _self = this
       let url = "api/store/customer/complaint/create"

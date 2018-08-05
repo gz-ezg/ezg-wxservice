@@ -1,8 +1,16 @@
 <template>
   <div>
-    <van-row v-for="item in tableData" :key="item.id">
-      <van-col span="20" style="font-size:10px;border:1px solid #636363;padding-left:12px">{{item.name}}</van-col>
-      <van-col span="4" style="font-size:12px;border:1px solid #636363;padding-left:12px">100</van-col>
+    <van-nav-bar
+        style="background-color: #CC3300;color:white"
+        title="企业评估报告"
+        left-arrow
+        @click-left="$backTo()"
+      />
+    <van-row style="padding:10px">
+      <van-row v-for="item in tableData" :key="item.id">
+        <van-col span="20" style="font-size:16px;border:1px solid #636363;padding-left:12px;line-height:16px">{{item.name}}</van-col>
+        <van-col span="4" style="font-size:16px;border:1px solid #636363;padding-left:12px;line-height:16px">100</van-col>
+      </van-row>
     </van-row>
   </div>
 </template>

@@ -42,7 +42,7 @@ Vue.prototype.$backTo = function(){
 Vue.prototype.$Get = function(url,config,success,fail){
   	this.$http.get(url, config).then(function(res){
     	if(res.data.msgCode == "40000"){
-      		console.log(res)
+      		// console.log(res)
       		success(res)
     	}else{
           console.warn(res)
@@ -58,7 +58,7 @@ Vue.prototype.$Get = function(url,config,success,fail){
 Vue.prototype.$Post = function(url,config,success,fail){
 	this.$http.post(url, config).then(function(res){
 	  if(res.data.msgCode == "40000"){
-			console.log(res)
+			// console.log(res)
 			success(res)
 	  }else{
 			console.warn(res)

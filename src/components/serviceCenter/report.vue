@@ -73,6 +73,9 @@ export default {
       }
 
       this.$Post(url, config, success, fail)
+    },
+    beforeClose(){
+      
     }
   },
   created(){

@@ -30,16 +30,16 @@
         </van-col>
       </van-row>
       <van-row style="margin-top:5px">
-        <van-col span="14">服务不满意？<a href="" @click="open_complain">我要投诉</a></van-col>
+        <van-col span="14">服务不满意？<a style="color:rgb(0, 0, 238)" @click="open_complain">我要投诉</a></van-col>
       </van-row>
     </van-row>
 
     <van-row>
-      <center><span @click="open_month_pick">做账账期</span></center>
+      <center class="demo_line_02"><span @click="open_month_pick">做账账期</span></center>
     </van-row>
-    <van-row style="margin-top:10px;margin-bottom:10px">
+    <van-row style="margin-top:20px;margin-bottom:10px">
       <center>
-        <span @click="open_month_pick">{{currentMonth}}</span>
+        <span @click="open_month_pick" class="date">{{currentMonth}}</span>
       </center>
     </van-row>
 
@@ -132,8 +132,8 @@ export default {
 
       let config = {
         params:{
-          // companyId:_self.$route.params.companyid
-          companyId:33927
+          companyId:_self.$route.params.companyid
+          // companyId:33927
         }
       }
 
@@ -157,13 +157,14 @@ export default {
       return value;
     },
     open_table(e){
-      console.log(e)
+      // console.log(e)
       let _self = this
+      let temp = _self.currentMonth.split("-").join("")
       this.$router.push({
         name:'table',
         params:{
           type:e,
-          period:_self.currentMonth,
+          period:temp,
           companyId:_self.$route.params.companyid
         }
       })
@@ -183,6 +184,25 @@ export default {
 <style scoped>
 .van-step--finish{
   color:red
+}
+.date::before{
+  content: "< "
+}
+.date::after{
+  content: " >";
+}
+.demo_line_02{
+    height: 1px;
+    border-top: 1px solid black;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.demo_line_02 span{
+    position: relative;
+    top: -13px;
+    background: whitesmoke;
+    padding: 0 20px;
 }
 /* .van-step--finish .van-step__line{
   background-color: red

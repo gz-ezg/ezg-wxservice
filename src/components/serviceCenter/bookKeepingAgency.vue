@@ -30,7 +30,7 @@
         </van-col>
       </van-row>
       <van-row style="margin-top:5px">
-        <van-col span="14">服务不满意？<a href="" @click="open_complain">我要投诉</a></van-col>
+        <van-col span="14">服务不满意？<a style="color:rgb(0, 0, 238)" @click="open_complain">我要投诉</a></van-col>
         <van-col span="10" style="font-size:10px;text-align:right;line-height:17px"><van-icon name="info-o" style="line-height:1px"/> <a href="https://mp.weixin.qq.com/s/W25DatAlyJIchb7-O74Myw">做账资料注意事项</a></van-col>
       </van-row>
     </van-row>
@@ -87,6 +87,7 @@ export default {
       })
     },
     open_report(e){
+      let _self = this
       this.$router.push({
         name: 'report',
         params:{
@@ -120,13 +121,13 @@ export default {
       let url = `api/store/customer/company/showCompanyProgressInfo`
       let config = {
         params:{
-          // companyId:_self.$route.params.companyid
-          companyId:33927
+          companyId:_self.$route.params.companyid
+          // companyId:33927
         }
       }
 
       function success(res){
-        console.log(res)
+        // console.log(res)
         _self.workOrderList = res.data.data.detail
         for(let i = 0;i<_self.workOrderList.length;i++){
           if(_self.workOrderList[i].BS == "Y" && _self.workOrderList[i].JZ == "Y"){
@@ -146,8 +147,8 @@ export default {
 
       let config = {
         params:{
-          // companyId:_self.$route.params.companyid
-          companyId:33927
+          companyId:_self.$route.params.companyid
+          // companyId:33927
         }
       }
 

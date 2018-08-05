@@ -162,6 +162,7 @@ export default {
       this.select_company_id = e.id
       this.select_company = false
       localStorage.setItem("companyName",this.showCompanyName)
+      localStorage.setItem("companyID",this.select_company_id)
       this.get_data()
     },
     //  打开服务详情
@@ -209,6 +210,7 @@ export default {
           _self.get_account()
           localStorage.setItem("companyName",_self.showCompanyName)
           _self.get_data()
+          // _self.get_account()
         }
       }
 
@@ -274,9 +276,17 @@ export default {
     }
   },
   created(){
+    // if(localStorage.getItem("companyID")){
+    //   this.select_company_id = localStorage.getItem("companyID")
+    // }
     this.get_company_list()
     this.get_date()
   },
+  // beforeUpdate(){
+  //   if(localStorage.getItem("companyID")){
+  //     console.log(localStorage.getItem("companyID"))
+  //   }
+  // },
   watch:{
     'select_company_id':'get_account'
   }
