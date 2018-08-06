@@ -30,4 +30,8 @@ export default {
 .van-icon::before {
   vertical-align: middle
 }
+
+.van-cell__left-icon{
+  line-height: 16px!important;
+}
 </style>

@@ -87,16 +87,14 @@ export default {
         console.log("手机号正确！")
         let url = `api/store/mobile/user/sendMsg`
         let config = {
-          params:{
-            mobile: _self.mobile
-          }
+          mobile: _self.mobile
         }
 
         function success(res){
           _self.$toast.success(res.data.msg)
           _self.isLogin = false
           _self.yzmDisable = true
-          _self.time = 5
+          _self.time = 60
           _self.change_time()
         }
 
@@ -104,7 +102,7 @@ export default {
           _self.$toast.fail(err.data.msg)
         }
 
-        this.$Get(url, config, success, fail)
+        this.$Post(url, config, success, fail)
       }else{
           console.log("手机号错误！")
       }

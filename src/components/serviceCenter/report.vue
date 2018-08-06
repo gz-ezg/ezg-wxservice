@@ -19,7 +19,6 @@
       v-model="show"
       message="您的专属顾问会尽快与您联系！"
       show-confirm-button
-      :before-close="beforeClose"
     >
     </van-dialog>
   </div>
@@ -74,9 +73,6 @@ export default {
 
       this.$Post(url, config, success, fail)
     },
-    beforeClose(){
-      
-    }
   },
   created(){
     let _self = this

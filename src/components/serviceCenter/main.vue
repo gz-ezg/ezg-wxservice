@@ -49,7 +49,7 @@
         </van-col>
       </van-row>
       <van-cell-group style="margin-top:10px">
-        <van-cell value="详情" is-link @click="open_report">
+        <van-cell value="详情" is-link @click="open_report" style="line-height:24px">
           <span slot="title">企业风险评估报告 <span style="font-size:10px;color:red" v-if="isNew">new</span></span>
         </van-cell>
       </van-cell-group>
@@ -59,13 +59,13 @@
           <van-collapse-item name="commercial">
             <div slot="title">商事服务({{commercialWorkOrder.length}})</div>
             <div slot="default">
-                <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
-                  <van-row>
+                <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
+                  <van-row style="margin-bottom:5px">
                     <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
                     <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
                   </van-row>
-                  <van-row>
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.CurrentProcess}}</span></van-col>
+                  <van-row style="margin-top:5px">
+                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
                     <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
                   </van-row>
                 </van-row>
@@ -75,9 +75,9 @@
             <div slot="title">企划服务({{planWorkOrder.length}})</div>
             <div slot="default">
                 <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
-                  <van-row>
+                  <van-row style="margin-bottom:5px">
                     <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
+                    <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
                   </van-row>
                   <van-row style="margin-top:5px">
                     <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.CurrentProcess}}</span></van-col>
@@ -205,12 +205,24 @@ export default {
         // console.log(res.data.data)
         _self.companyList = res.data.data
         if(res.data.data){
-          _self.showCompanyName = res.data.data[0].companyname
-          _self.select_company_id = res.data.data[0].id
-          _self.get_account()
-          localStorage.setItem("companyName",_self.showCompanyName)
-          _self.get_data()
-          // _self.get_account()
+          if(!localStorage.getItem("companyName")){
+            console.log(localStorage.getItem("companyName"))
+            console.log("1111")
+            _self.showCompanyName = res.data.data[0].companyname
+            _self.select_company_id = res.data.data[0].id
+            localStorage.setItem("companyName",_self.showCompanyName)
+            localStorage.setItem("companyID",_self.select_company_id)
+            _self.get_account()
+            _self.get_data()
+          }else{
+            console.log("2222")
+            _self.showCompanyName = localStorage.getItem("companyName")
+            _self.select_company_id = parseInt(localStorage.getItem("companyID"))
+            localStorage.setItem("companyName",_self.showCompanyName)
+            localStorage.setItem("companyID",_self.select_company_id)
+            _self.get_account()
+            _self.get_data()
+          }
         }
       }
 

@@ -43,10 +43,10 @@
       </center>
     </van-row>
   <van-cell-group >
-    <van-cell title="增值税" :value="accountTotal.shuijin" style="font-size:20px"/>
-    <van-cell title="企业所得税" :value="accountTotal.qiyesuodeshui" style="font-size:20px"/>
-    <van-cell title="个税" :value="accountTotal.gerensuodeshui" style="font-size:20px"/>
-    <van-cell title="附加税" :value="accountTotal.qitashuifei" style="font-size:20px"/>
+    <van-cell icon="gold-coin" title="增值税" :value="accountTotal.shuijin" style="font-size:18px"/>
+    <van-cell icon="gold-coin" title="企业所得税" :value="accountTotal.qiyesuodeshui" style="font-size:18px"/>
+    <van-cell icon="gold-coin" title="个税" :value="accountTotal.gerensuodeshui" style="font-size:18px"/>
+    <van-cell icon="gold-coin" title="附加税" :value="accountTotal.qitashuifei" style="font-size:18px" />
   </van-cell-group>
 
   <!-- <van-swipe>
@@ -184,13 +184,15 @@ export default {
     }
   },
   mounted(){
-
-  },
-  created(){
     this.companyName = localStorage.getItem("companyName")
-    this.currentMonth = this.$route.params.period.slice(0,4)+"-" + this.$route.params.period.slice(4)
+    let temp = this.$route.params.period.toString()
+    // this.currentMonth = this.$route.params.period.slice(0,4)+"-" + this.$route.params.period.slice(4)
+    this.currentMonth = temp.slice(0,4) + "-" + temp.slice(4)
     this.get_base_info()
     this.get_account()
+  },
+  created(){
+
   }
 }
 </script>
@@ -204,6 +206,10 @@ export default {
 }
 .date::after{
   content: " >";
+}
+
+.van-cell__left-icon{
+  line-height: 16px!important;
 }
 
 .demo_line_02{

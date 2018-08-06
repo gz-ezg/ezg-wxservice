@@ -176,7 +176,9 @@ export default {
   created(){
     this.companyName = localStorage.getItem("companyName")
     this.get_base_info()
-    this.currentMonth = this.$route.params.period.slice(0,4)+"-" + this.$route.params.period.slice(4)
+    let temp = this.$route.params.period.toString()
+    // this.currentMonth = this.$route.params.period.slice(0,4)+"-" + this.$route.params.period.slice(4)
+    this.currentMonth = temp.slice(0,4) + "-" + temp.slice(4)
   }
 }
 </script>
