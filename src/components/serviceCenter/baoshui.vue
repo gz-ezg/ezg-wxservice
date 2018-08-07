@@ -208,9 +208,7 @@ export default {
   content: " >";
 }
 
-.van-cell__left-icon{
-  line-height: 16px!important;
-}
+
 
 .demo_line_02{
     height: 1px;

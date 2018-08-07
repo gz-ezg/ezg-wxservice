@@ -9,11 +9,11 @@
         <van-row>
             <van-swipe>
                 <van-swipe-item>
-                  <img src="../login/logo.png" width="100%" height="150px" />
+                  <img src="./dymaic.png" width="100%" height="150px" />
                 </van-swipe-item>
             </van-swipe>
         </van-row>
-        <van-steps direction="vertical" :active="activeIndex" active-color="#f60" style="margin-top:40px">
+        <van-steps direction="vertical" :active="activeIndex" active-color="#f60" style="margin-top:20px;margin-bottom:60px">
             <van-step v-for="item in workOrderList" :key="item.id">
                 <van-row >
                 <van-col span="10" >{{item.PROCESS}}</van-col>
@@ -21,7 +21,7 @@
                 </van-row>
             </van-step>
         </van-steps>
-        <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">我要催单</van-button>
+        <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300;z-index:3" @click="submit">我要催单</van-button>
     </van-row>
 </template>
 
@@ -110,5 +110,8 @@ export default {
 .van-step--finish{
   color:green
 }
+/* .van-step__circle-container>i{
+  z-index: 0!important
+} */
 </style>
 

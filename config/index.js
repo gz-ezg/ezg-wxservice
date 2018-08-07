@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {
         '/api': {
             // target: 'http://zonewx.zgcfo.com/api/',
-            // target: 'http://192.168.0.220:9000',
-            target: 'http://192.168.0.224:9000',
+            target: 'http://192.168.0.220:9000',
+            // target: 'http://192.168.0.224:9000',
             changeOrigin: true,
             secure: false,
             pathRewrite: {

@@ -80,7 +80,7 @@
                     <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
                   </van-row>
                   <van-row style="margin-top:5px">
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px">{{item.CurrentProcess}}</span></van-col>
+                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
                     <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
                   </van-row>
                 </van-row>
@@ -254,7 +254,7 @@ export default {
           }
         }
         if(res.data.data.PLAN){
-          _self.planWorkOrder = res.data.data.planWorkOrder
+          _self.planWorkOrder = res.data.data.PLAN
         }
       }
 
