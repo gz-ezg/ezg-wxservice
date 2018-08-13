@@ -44,7 +44,18 @@ export default new Router({
     {
       path:'/servicecenterindex',
       name:'serviceCenterIndex',
-      component: serviceCenterIndex
+      component: serviceCenterIndex,
+      beforeEnter: (to, from, next) => {
+        console.log(to)
+        console.log(from)
+        if(from.name){
+          console.log("路由存在！")
+        }else{
+          console.log("路由不存在！")
+          localStorage.clear()
+        }
+        next()
+      },
     },
 
     {

@@ -66,7 +66,7 @@ export default {
       workOrderList:[],
       // finish:true,
       activeIndex: 0,
-      tel: 13580328323,
+      tel: "",
       companyName: "无",
     }
   },

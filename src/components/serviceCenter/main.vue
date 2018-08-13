@@ -205,6 +205,9 @@ export default {
         // console.log(res.data.data)
         _self.companyList = res.data.data
         if(res.data.data){
+          if(res.data.data.length == 0){
+            _self.$toast.fail("客户未绑定企业！")
+          }
           if(!localStorage.getItem("companyName")){
             console.log(localStorage.getItem("companyName"))
             console.log("1111")
@@ -255,6 +258,11 @@ export default {
         }
         if(res.data.data.PLAN){
           _self.planWorkOrder = res.data.data.PLAN
+          for(let i = 0;i<_self.planWorkOrder.length;i++){
+            if(_self.planWorkOrder[i].service_end_time){
+              _self.planWorkOrder[i].service_end_time = _self.planWorkOrder[i].service_end_time.slice(0,10)
+            }
+          }
         }
       }
 
