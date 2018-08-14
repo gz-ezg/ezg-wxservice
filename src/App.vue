@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <van-row style="overflow-x: hidden;" :class="{table_style:istable}" :style="{height:height+'px',width:width+'px',top:top+'px'}">
+  <div id="app" :style="{height:height+'px',width:width+'px',top:top+'px'}" style="overflow-x: scroll;" :class="{table_style:istable}">
+    <van-row  >  
       <router-view/>
     </van-row>
   </div>
@@ -21,15 +21,27 @@ export default {
     }
   },
   created(){
-
     let _self = this
+    localStorage.setItem("width",document.documentElement.clientWidth || document.body.clientWidth)
+    // alert(document.documentElement.clientWidth || document.body.clientWidth)
+    localStorage.setItem("height",document.documentElement.clientHeight || document.body.clientHeight)
+    // alert(document.documentElement.clientHeight || document.body.clientHeight)
+
     this.$bus.on("UPDATE_TABLE",(e)=>{
       // console.log(window.screen.availHeight)
       // console.log(window.screen.availWidth)
       // console.log("111111")
-      _self.height = window.screen.availWidth
-      _self.width = window.screen.availHeight
-      _self.top = "-" + window.screen.availWidth
+      // _self.height = window.screen.availWidth
+      // _self.height = document.body.clientWidth
+      _self.height = localStorage.getItem("width")
+      _self.width = localStorage.getItem("height")
+
+      _self.top = "-" + localStorage.getItem("width")
+
+      // _self.width = window.screen.availHeight
+      // _self.width = document.body.clientHeight
+      // _self.top = "-" + window.screen.availWidth
+      // _self.top = "-" + document.body.clientWidth
       _self.istable = true
     })
     this.$bus.on("CANCEL_TABLE",(e)=>{

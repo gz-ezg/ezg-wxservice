@@ -30,7 +30,7 @@
       </thead>
         <tbody >
           <tr v-for="item in tableData" :key="item.id">
-            <td>{{item.name}}</td>
+            <td v-html="$options.filters.replace(item.name)"></td>
             <td :class="{ zero: item.current_year<0}">{{item.current_year}}</td>
             <td :class="{ zero: item.current_month<0}">{{item.current_month}}</td>
           </tr>
@@ -47,7 +47,7 @@
       </thead>
         <tbody >
           <tr v-for="item in tableData" :key="item.id">
-            <td>{{item.name}}</td>
+            <td v-html="$options.filters.replace(item.name)"></td>
             <td :class="{ zero: item.current_year<0}">{{item.current_year}}</td>
             <td :class="{ zero: item.current_month<0}">{{item.current_month}}</td>
           </tr>
@@ -67,12 +67,12 @@
       </thead>
         <tbody >
           <tr v-for="item in tableData" :key="item.id">
-            <td>{{item.asset | replace}}</td>
-            <td :class="{ zero: item.asset_year_init_balance<0}">{{item.asset_year_init_balance}}</td>
-            <td :class="{ zero: item.asset_end_balance<0}">{{item.asset_end_balance}}</td>
-            <td>{{item.equity}}</td>
-            <td :class="{ zero: item.equity_year_init_balance<0}">{{item.equity_year_init_balance}}</td>
-            <td :class="{ zero: item.equity_end_balance<0}">{{item.equity_end_balance}}</td>
+            <td v-html="$options.filters.replace(item.asset)" style="width:26%"></td>
+            <td :class="{ zero: item.asset_year_init_balance<0}" style="width:12%">{{item.asset_year_init_balance}}</td>
+            <td :class="{ zero: item.asset_end_balance<0}" style="width:12%">{{item.asset_end_balance}}</td>
+            <td v-html="$options.filters.replace(item.equity)" style="width:26%"></td>
+            <td :class="{ zero: item.equity_year_init_balance<0}" style="width:12%">{{item.equity_year_init_balance}}</td>
+            <td :class="{ zero: item.equity_end_balance<0}" style="width:12%">{{item.equity_end_balance}}</td>
           </tr>
         </tbody>
       </table>
@@ -84,7 +84,7 @@
 export default {
   data(){
     return{
-      tableData:[]
+      tableData:[],
     }
   },
   methods:{
@@ -105,7 +105,7 @@ export default {
       }
 
       function success(res){
-        // console.log(res.data.data)
+        console.log(res.data.data)
         _self.tableData = res.data.data
       }
 
@@ -122,12 +122,19 @@ export default {
         return ""
       }
       value = value.toString()
-      console.log(value)
+      // console.log(value.replace(/ /g,"&nbsp;"))
+      return value.replace(/ /g,"&nbsp;&nbsp;")
     }
   },
   created(){
     this.get_table_data()
-    this.$bus.emit("UPDATE_TABLE",true)
+  },
+  beforeRouteEnter(to,from,next){
+    let _self = this
+    
+    next(vm=>{
+      vm.$bus.emit("UPDATE_TABLE",true)
+    })
   },
   beforeRouteLeave(to,from,next){
     // console.log("这是退出路由！")
