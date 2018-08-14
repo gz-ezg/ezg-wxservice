@@ -1,7 +1,7 @@
 <template>
     <van-row>
         <van-nav-bar
-            style="background-color: #CC3300;color:white"
+            style="background-color: #952f2a;color:white"
             title="做账资料说明"
             left-arrow
             @click-left="$backTo()"

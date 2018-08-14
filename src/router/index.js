@@ -97,7 +97,7 @@ export default new Router({
     {
       path: '/table/:companyid/:period/:type',
       name: 'table',
-      component: table
+      component: table,
     },
     {
       path: '/report/:companyid/:period',

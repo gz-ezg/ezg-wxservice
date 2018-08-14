@@ -1,7 +1,7 @@
 <template>
     <van-row>
         <van-nav-bar
-            style="background-color: #CC3300;color:white"
+            style="background-color: #952f2a;color:white"
             :title="companyName"
             left-arrow
             @click-left="$backTo()"
@@ -21,7 +21,7 @@
                 </van-row>
             </van-step>
         </van-steps>
-        <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300;z-index:3" @click="submit">我要催单</van-button>
+        <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#952f2a;z-index:3" @click="submit">我要催单</van-button>
     </van-row>
 </template>
 

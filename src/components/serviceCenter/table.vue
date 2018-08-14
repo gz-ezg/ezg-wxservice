@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-        style="background-color: #CC3300;color:white"
+        style="background-color: #952f2a;color:white"
         title="企业评估报告"
         left-arrow
         @click-left="$backTo()"
@@ -12,6 +12,13 @@
         <van-col span="4" style="font-size:16px;border:1px solid #636363;padding-left:12px;line-height:16px">100</van-col>
       </van-row>
     </van-row> -->
+
+
+
+
+
+
+
     <div style="padding:10px">
       <table class="table table-striped table-bordered" v-if="this.$route.params.type == 'cash'">
       <thead>
@@ -60,7 +67,7 @@
       </thead>
         <tbody >
           <tr v-for="item in tableData" :key="item.id">
-            <td>{{item.asset}}</td>
+            <td>{{item.asset | replace}}</td>
             <td :class="{ zero: item.asset_year_init_balance<0}">{{item.asset_year_init_balance}}</td>
             <td :class="{ zero: item.asset_end_balance<0}">{{item.asset_end_balance}}</td>
             <td>{{item.equity}}</td>
@@ -98,7 +105,7 @@ export default {
       }
 
       function success(res){
-        console.log(res.data.data)
+        // console.log(res.data.data)
         _self.tableData = res.data.data
       }
 
@@ -109,8 +116,24 @@ export default {
       this.$Get(url, config, success, fail)
     }
   },
+  filters:{
+    replace:function(value){
+      if(!value){
+        return ""
+      }
+      value = value.toString()
+      console.log(value)
+    }
+  },
   created(){
     this.get_table_data()
+    this.$bus.emit("UPDATE_TABLE",true)
+  },
+  beforeRouteLeave(to,from,next){
+    // console.log("这是退出路由！")
+    let _self = this
+    _self.$bus.emit("CANCEL_TABLE",true)
+    next()
   }
 }
 </script>

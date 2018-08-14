@@ -1,7 +1,7 @@
 <template>
   <van-row>
     <van-nav-bar
-      style="background-color: #CC3300;color:white"
+      style="background-color: #952f2a;color:white"
       :title="detail.product"
       left-arrow
       @click-left="$backTo()"
@@ -169,6 +169,10 @@ export default {
       }
 
       function fail(err){
+        _self.accountTotal.shuijin = "0元"
+        _self.accountTotal.qiyesuodeshui = "0元"
+        _self.accountTotal.gerensuodeshui = "0元"
+        _self.accountTotal.qitashuifei = "0元"
         _self.$toast.fail(err.data.msg)
       }
 

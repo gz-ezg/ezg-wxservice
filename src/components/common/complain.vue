@@ -1,7 +1,7 @@
 <template>
   <van-row>
     <van-nav-bar
-      style="background-color: #CC3300;color:white"
+      style="background-color: #952f2a;color:white"
       title="客服中心"
       left-arrow
       @click-left="$backTo()"
@@ -28,7 +28,7 @@
     >
     </van-dialog>
 
-      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="before">提交</van-button>
+      <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#952f2a" @click="before">提交</van-button>
   </van-row>
 </template>
 

@@ -1,10 +1,11 @@
 <template>
   <div>
     <van-row style="padding-bottom:45px">
-      <van-row style="padding: 10px; background-color: #CC3300; border-bottom: 1px solid white;" >
-        <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}</center>
+      <!-- #CC3300 -->
+      <van-row style="padding: 10px; background-color: #952f2a; border-bottom: 1px solid white;" >
+        <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}<van-icon name="arrow" /></center>
       </van-row>
-      <div style="height:150px;padding: 10px; background-color: #CC3300; border-bottom: 1px solid #eeeeee;color: white" >
+      <div style="height:150px;padding: 10px; background-color: #952f2a; border-bottom: 1px solid #eeeeee;color: white" >
         <van-row>
           <van-row style="font-size:14px;line-height:14px;">
             <van-col span="12" >
@@ -103,12 +104,13 @@
         </van-cell-group>
       </van-radio-group>
     </van-dialog>
-    <van-tabbar v-model="activetabbar" fixed>
+    <!--  暂时关闭  -->
+    <!-- <van-tabbar v-model="activetabbar" fixed>
       <van-tabbar-item icon="home" url="http://m.zgcfo.com/">首页</van-tabbar-item>
       <van-tabbar-item icon="chat" url="http://www16.53kf.com/m.php?cid=72151061">在线咨询</van-tabbar-item>
       <van-tabbar-item icon="info-o" to="/">我的服务</van-tabbar-item>
       <van-tabbar-item icon="contact" url="http://m.zgcfo.com/center.html">个人中心</van-tabbar-item>
-    </van-tabbar>
+    </van-tabbar> -->
   </div>
 </template>
 

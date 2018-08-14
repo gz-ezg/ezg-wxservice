@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-      style="background-color: #CC3300;color:white"
+      style="background-color: #952f2a;color:white"
       title="企业评估报告"
       left-arrow
       @click-left="$backTo()"
@@ -13,7 +13,7 @@
         <p v-for="(item, index) in report" :key="index" style="text-indent:30px;line-height:200%">{{index+1}}.{{item.base_message}}</p>
       </van-row>
     </div>
-    <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#cc3300" @click="submit">联系管家获得完整解决方案</van-button>
+    <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px;position:fixed;bottom:0px;background-color:#952f2a" @click="submit">联系管家获得完整解决方案</van-button>
     <van-dialog
       title=""
       v-model="show"
