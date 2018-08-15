@@ -1,6 +1,6 @@
 <template>
   <div id="app" :style="{height:height+'px',width:width+'px',top:top+'px'}" style="overflow-x: scroll;" :class="{table_style:istable}">
-    <van-row  >  
+    <van-row  >
       <router-view/>
     </van-row>
   </div>
@@ -20,12 +20,54 @@ export default {
       top:""
     }
   },
+  methods:{
+    checkPlatform(){
+
+      if(/android/i.test(navigator.userAgent)){
+
+          // alert("Android");
+          localStorage.setItem("device_type","Android")
+      }
+
+      if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+
+          // alert("iOS");
+          localStorage.setItem("device_type","iOS")
+
+
+      }
+        if(/(Windows Phone|windows|Windows)/i.test(navigator.userAgent)){
+
+          // alert("Windows Phone");
+          localStorage.setItem("device_type","Windows")
+
+
+      }
+    }
+  },
   created(){
     let _self = this
-    localStorage.setItem("width",document.documentElement.clientWidth || document.body.clientWidth)
+    _self.checkPlatform()
+    // alert($(window).width())
+    let screenWidth
+    let screenHeight
+    if(localStorage.getItem("device_type") == "iOS"){
+      console.log("111111")
+      screenWidth = $(window).width()
+      screenHeight = $(window).height()-50
+    }else{
+      // alert("2222222222222")
+      screenWidth = $(window).width()
+      screenHeight = $(window).height()
+    }
+
+    // localStorage.setItem("width",document.documentElement.clientWidth || document.body.clientWidth)
     // alert(document.documentElement.clientWidth || document.body.clientWidth)
-    localStorage.setItem("height",document.documentElement.clientHeight || document.body.clientHeight)
+    // localStorage.setItem("height",document.documentElement.clientHeight || document.body.clientHeight)
     // alert(document.documentElement.clientHeight || document.body.clientHeight)
+    localStorage.setItem("width",screenWidth)
+    localStorage.setItem("height",screenHeight)
+
 
     this.$bus.on("UPDATE_TABLE",(e)=>{
       // console.log(window.screen.availHeight)
@@ -83,6 +125,8 @@ export default {
   position: absolute;
   transform-origin: left bottom;
   left: 0;
+  overflow-y: scroll
+  /* overflow-x: hidden */
   /* width: 603px;
   height: 375px;
   top: -375px; */

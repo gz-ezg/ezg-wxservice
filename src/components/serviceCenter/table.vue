@@ -131,7 +131,7 @@ export default {
   },
   beforeRouteEnter(to,from,next){
     let _self = this
-    
+
     next(vm=>{
       vm.$bus.emit("UPDATE_TABLE",true)
     })

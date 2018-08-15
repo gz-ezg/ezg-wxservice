@@ -12,7 +12,7 @@
       </center>
     </van-row>
 
-    <van-row style="background-color: #FF8C69;padding:10px;margin:20px;font-size:14px">
+    <van-row style="background-color: rgba(255, 240, 245,0.5);padding:10px;margin:20px;font-size:14px">
       <van-row style="border-bottom:1px solid #999;padding-bottom:5px">
         <van-col span="18">
           <van-row>

@@ -9,6 +9,7 @@ import { Lazyload } from 'vant';
 import axios from 'axios'
 // import { url } from 'inspector';
 import VueBus from './common/vue-bus'
+import $ from 'jquery'
 
 Vue.use(Vant);
 Vue.use(Lazyload);
