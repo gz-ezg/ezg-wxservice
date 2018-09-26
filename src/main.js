@@ -9,6 +9,8 @@ import { Lazyload } from 'vant';
 import axios from 'axios'
 // import { url } from 'inspector';
 import VueBus from './common/vue-bus'
+import { Toast } from 'vant';
+
 import $ from 'jquery'
 
 Vue.use(Vant);
@@ -47,10 +49,12 @@ Vue.prototype.$Get = function(url,config,success,fail){
       		success(res)
     	}else{
           console.warn(res)
+          Toast.fail(res.data.msg)
       		fail(res)
     	}
   	}).catch(function(err){
-		  console.error(err)
+      console.error(err)
+      Toast.fail(err)
 		  fail(err)
 	})
 }
@@ -59,14 +63,17 @@ Vue.prototype.$Get = function(url,config,success,fail){
 Vue.prototype.$Post = function(url,config,success,fail){
 	this.$http.post(url, config).then(function(res){
 	  if(res.data.msgCode == "40000"){
-			// console.log(res)
+      // console.log(res)
+      Toast.success(res.data.msg)
 			success(res)
 	  }else{
-			console.warn(res)
+      console.warn(res)
+      Toast.fail(res.data.msg)
 			fail(res)
 	  }
 	}).catch(function(err){
-		console.error(err)
+    console.error(err)
+    Toast.fail(err)
 		fail(err)
   })
 }
@@ -85,11 +92,11 @@ Vue.prototype.$GetDataCenter = function(params, finish){
         if(res.data.msgCode == "40000"){
             finish(res)
         }else{
-            _self.$Message.error("请求异常！")
+            // _self.$Message.error("请求异常！")
         }
     }).catch(function(err){
         console.log(err)
-        _self.$Message.error("网络异常！")
+        // _self.$Message.error("网络异常！")
     })
 }
 

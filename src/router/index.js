@@ -25,6 +25,12 @@ import baoShui from 'base/serviceCenter/baoshui'
 import report from 'base/serviceCenter/report'
 import table from 'base/serviceCenter/table'
 
+//  资料管理
+import customerComfirm from 'base/source/customer_comfirm'
+import comfirmSuccess from 'base/source/comfirm_success'
+import comfirmFail from 'base/source/comfirm_fail'
+
+
 
 Vue.use(Router)
 
@@ -49,9 +55,9 @@ export default new Router({
         console.log(to)
         console.log(from)
         if(from.name){
-          console.log("路由存在！")
+          // console.log("路由存在！")
         }else{
-          console.log("路由不存在！")
+          // console.log("路由不存在！")
           localStorage.clear()
         }
         next()
@@ -103,6 +109,25 @@ export default new Router({
       path: '/report/:companyid/:period',
       name: 'report',
       component: report
+    },
+    //  资料相关部分
+    //  确认页
+    {
+      path: '/customer_confirm/:id',
+      name: "customer_comfirm",
+      component: customerComfirm
+    },
+    //  成功页
+    {
+      path: '/comfirmSuccess',
+      name: "comfirm_success",
+      component: comfirmSuccess
+    },
+    //  拒绝页
+    {
+      path: '/comfirmFail',
+      name: "comfirm_fail",
+      component: comfirmFail
     },
     {
       path: '/',
