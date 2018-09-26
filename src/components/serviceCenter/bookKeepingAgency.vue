@@ -155,8 +155,8 @@ export default {
       function success(res){
         // console.log("1111111111")
         // console.log(res.data.data[0])
-        _self.tel = res.data.data[0].mobilePhone
-        _self.detail = res.data.data[0]
+        _self.tel = res.data.data.mobilePhone
+        _self.detail = res.data.data
       }
 
       function fail(err){

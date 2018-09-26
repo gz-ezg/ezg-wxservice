@@ -95,12 +95,12 @@ export default {
 
       let config = {
         params:{
-          // companyId:_self.$route.params.companyid,
-          // period: _self.$route.params.period,
-          // type: _self.$route.params.type
-          companyId: '33784',
-          period: '201805',
+          companyId:_self.$route.params.companyid,
+          period: _self.$route.params.period,
           type: _self.$route.params.type
+          // companyId: '33784',
+          // period: '201805',
+          // type: _self.$route.params.type
         }
       }
 

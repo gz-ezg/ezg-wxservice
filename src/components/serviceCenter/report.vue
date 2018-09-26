@@ -8,7 +8,7 @@
     />
     <div>
       <h4 style="padding-left:20px">{{companyname}}：</h4>
-      <van-row style="padding:20px;padding-top:0px">
+      <van-row style="padding:20px;padding-top:0px;margin-bottom:30px">
         <p>东家您好,您的{{year}}年{{month}}账期的评估报告如下：</p>
         <p v-for="(item, index) in report" :key="index" style="text-indent:30px;line-height:200%">{{index+1}}.{{item.base_message}}</p>
       </van-row>

@@ -240,6 +240,15 @@ export default {
     get_data(){
       this.commercialWorkOrder = []
       this.planWorkOrder = []
+      this.accountTotal.huobizijin=0,
+      this.accountTotal.shuijin=0,
+      this.accountTotal.yuelirun=0,
+      this.accountTotal.qitashuifei=0,
+      this.accountTotal.yueshouru=0,
+      this.accountTotal.chengbenfeiyong=0,
+      this.accountTotal.qiyesuodeshui=0,
+      this.accountTotal.gerensuodeshui=0
+
       let _self = this
       let url = `api/store/customer/company/work/order/list`
       let config = {
