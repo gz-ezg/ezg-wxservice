@@ -12,7 +12,7 @@
               财务报表 {{year}}年{{month}}月
             </van-col>
             <van-col span="12" style="text-align:right">
-              <span>服务详情</span><van-icon name="arrow" style="font-size:12px" @click="open_detail()" />
+              <span>账务详情</span><van-icon name="arrow" style="font-size:12px" @click="open_detail()" />
             </van-col>
           </van-row>
           <van-row style="margin-top:30px">

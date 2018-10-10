@@ -37,6 +37,7 @@ export default {
       localStorage.clear()
       sessionStorage.clear()
       window.close()
+      WeixinJSBridge.call('closeWindow')
     },
     back_to_index(){
       this.$router.push({

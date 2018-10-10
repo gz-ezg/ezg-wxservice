@@ -6,8 +6,12 @@
         <van-icon name="checked" style="font-size:15vh;color:red"/>
       </center>
       <center style="font-weight:400;font-size:4vw;margin-top:20px">
-        您拒绝了此次资料交接，您的专属服务人员将尽快与您联系！
+        您拒绝了此次资料交接。
       </center>
+      <center style="font-weight:400;font-size:4vw;margin-top:10px">
+        您的专属服务人员将尽快与您联系！
+      </center>
+
       <center @click="back_to_index" style="margin-top:10px">
         <a style="font-size:12px">点击此处返回首页</a>
       </center>
@@ -37,6 +41,7 @@ export default {
       localStorage.clear()
       sessionStorage.clear()
       window.close()
+      WeixinJSBridge.call('closeWindow')
     },
     back_to_index(){
       this.$router.push({

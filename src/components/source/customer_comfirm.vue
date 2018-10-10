@@ -111,8 +111,9 @@ export default {
   created(){
     let _self = this
     let id = this.$route.params.id
-    _self.connectRequestId = this.$route.params.id
-    this.get_source_data(id)
+    _self.connectRequestId = (this.$route.params.id).slice(1)
+    console.log(_self.connectRequestId)
+    this.get_source_data(id.slice(1))
   }
 }
 </script>
