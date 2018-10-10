@@ -12,7 +12,7 @@
       </center>
     </van-row>
 
-    <van-row style="background-color: rgba(255, 240, 245,0.5);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA">
+    <van-row style="background-color: rgba(255, 240, 245,1);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA">
       <van-row style="border-bottom:1px solid #999;padding-bottom:5px">
         <van-col span="18">
           <van-row>
@@ -139,7 +139,7 @@ export default {
 
       function success(res){
         _self.tel = res.data.data.mobilePhone
-        _self.detail = res.data.data  
+        _self.detail = res.data.data
       }
 
       function fail(err){

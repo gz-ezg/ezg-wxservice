@@ -5,14 +5,14 @@
       <van-row style="padding: 10px; background-color: #952f2a; border-bottom: 1px solid white;" >
         <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}<van-icon name="arrow" /></center>
       </van-row>
-      <div style="height:150px;padding: 10px; background-color: #952f2a; border-bottom: 1px solid #eeeeee;color: white" >
+      <div style="height:150px;padding: 10px; background-color: #952f2a; border-bottom: 1px solid #eeeeee;color: white" @click="open_detail()">
         <van-row>
           <van-row style="font-size:14px;line-height:14px;">
             <van-col span="12" >
               财务报表 {{year}}年{{month}}月
             </van-col>
             <van-col span="12" style="text-align:right">
-              <span>账务详情</span><van-icon name="arrow" style="font-size:12px" @click="open_detail()" />
+              <span>账务详情</span><van-icon name="arrow" style="font-size:12px"  />
             </van-col>
           </van-row>
           <van-row style="margin-top:30px">
@@ -61,14 +61,16 @@
             <div slot="title">商事服务({{commercialWorkOrder.length}})</div>
             <div slot="default">
                 <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
-                  <van-row style="margin-bottom:5px">
-                    <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
-                  </van-row>
-                  <van-row style="margin-top:5px">
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
-                  </van-row>
+                  <div @click="open_workorder_detail(item.workorderId)">
+                    <van-row style="margin-bottom:5px">
+                      <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
+                      <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow"  /></van-col>
+                    </van-row>
+                    <van-row style="margin-top:5px">
+                      <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
+                      <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                    </van-row>
+                  </div>
                 </van-row>
             </div>
           </van-collapse-item>
@@ -76,14 +78,16 @@
             <div slot="title">企划服务({{planWorkOrder.length}})</div>
             <div slot="default">
                 <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
-                  <van-row style="margin-bottom:5px">
-                    <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow" @click="open_workorder_detail(item.workorderId)" /></van-col>
-                  </van-row>
-                  <van-row style="margin-top:5px">
-                    <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                    <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
-                  </van-row>
+                  <div @click="open_workorder_detail(item.workorderId)">
+                    <van-row style="margin-bottom:5px">
+                      <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
+                      <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow"  /></van-col>
+                    </van-row>
+                    <van-row style="margin-top:5px">
+                      <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
+                      <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                    </van-row>
+                  </div>
                 </van-row>
             </div>
           </van-collapse-item>

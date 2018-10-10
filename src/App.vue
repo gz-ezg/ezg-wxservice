@@ -1,5 +1,6 @@
 <template>
-  <div id="app" :style="{height:height+'px',width:width+'px',top:top+'px'}" style="overflow-x: scroll;" :class="{table_style:istable}">
+  <!-- <div id="app" :style="{height:height+'px',width:width+'px',top:top+'px'}" style="overflow-x: scroll;" :class="{table_style:istable}"> -->
+  <div id="app" :style="{height: height ,width: width,bottom:width }" style="overflow-x: scroll;" :class="{table_style:istable}">
     <van-row  >
       <router-view/>
     </van-row>
@@ -53,12 +54,16 @@ export default {
     let screenHeight
     if(localStorage.getItem("device_type") == "iOS"){
       console.log("111111")
-      screenWidth = $(window).width()
-      screenHeight = $(window).height()-50
+      // screenWidth = "100vw"
+      // screenHeight = "100vh"
+      screenWidth = "100vw"
+      screenHeight = "100vh"
     }else{
+      // screenWidth = "100vw"
+      // screenHeight = "100vh"
       // alert("2222222222222")
-      screenWidth = $(window).width()
-      screenHeight = $(window).height()
+      screenWidth = "100vw"
+      screenHeight = "100vh"
     }
 
     // localStorage.setItem("width",document.documentElement.clientWidth || document.body.clientWidth)
@@ -75,10 +80,11 @@ export default {
       // console.log("111111")
       // _self.height = window.screen.availWidth
       // _self.height = document.body.clientWidth
-      _self.height = localStorage.getItem("width")
-      _self.width = localStorage.getItem("height")
-
-      _self.top = "-" + localStorage.getItem("width")
+      // _self.height = localStorage.getItem("width")
+      // _self.width = localStorage.getItem("height")
+      _self.height = "100vw"
+      _self.width = "100vh"
+      // _self.top = "-" + localStorage.getItem("width")
 
       // _self.width = window.screen.availHeight
       // _self.width = document.body.clientHeight
@@ -87,8 +93,8 @@ export default {
       _self.istable = true
     })
     this.$bus.on("CANCEL_TABLE",(e)=>{
-      _self.height = window.screen.availHeight
-      _self.width = window.screen.availWidth
+      _self.height = "100vh"
+      _self.width = "100vw"
       _self.top = ""
       _self.istable = false
     })

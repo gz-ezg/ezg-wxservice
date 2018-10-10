@@ -12,7 +12,7 @@
       </center>
     </van-row>
 
-    <van-row style="background-color: rgba(255, 240, 245,0.5);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA">
+    <van-row style="background-color: rgba(255, 240, 245,1);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA">
       <van-row style="border-bottom:1px solid #999;padding-bottom:5px">
         <van-col span="18">
           <van-row>
@@ -39,12 +39,20 @@
       <van-step v-for="(item, index) in workOrderList" :key="index">
         <van-row>
           <van-col span="6" >{{item.period}}</van-col>
-          <van-col span="5" ><span style="line-height:21px" @click="open_baoshui(item)">报税 <van-icon name="passed" v-if="item.BS=='Y'" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="item.BS!='Y'" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="5" ><span style="line-height:21px" @click="open_zuozhang(item)">做账 <van-icon name="passed" v-if="item.JZ=='Y'" style="font-size:14px;color:#00EE00;line-height:1px"/><van-icon name="clock" v-if="item.JZ!='Y'" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px">风险评估报告</span></van-col>
+          <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_baoshui(item)">报税 <van-icon name="search" v-if="item.BS=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.BS!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_zuozhang(item)">做账 <van-icon name="search" v-if="item.JZ=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.JZ!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px" :class="{ underline: item.BS == 'Y'}">风险评估报告</span></van-col>
         </van-row>
       </van-step>
+      <van-row>
+        <div style="width:95%;font-size:14px;line-height:1em">
+          <p>温馨提示：</p>
+          <p style="margin:0;padding-bottom:2em;text-indent: 2em">历史的<span style="color:red">做账、报税、风险评估报告</span>可点击哦！</p>
+        </div>
+      </van-row>
     </van-steps>
+
+
   </van-row>
 </template>
 
@@ -88,6 +96,10 @@ export default {
     },
     open_report(e){
       let _self = this
+      console.log(e)
+      if(e.id == ""){
+        return
+      }
       this.$router.push({
         name: 'report',
         params:{
@@ -98,6 +110,9 @@ export default {
     },
     open_baoshui(e){
       let _self = this
+      if(e.id == ""){
+        return
+      }
       this.$router.push({
         name: 'baoshui',
         params:{
@@ -108,6 +123,9 @@ export default {
     },
     open_zuozhang(e){
       let _self = this
+      if(e.id == ""){
+        return
+      }
       this.$router.push({
         name: 'zuozhang',
         params:{
@@ -186,4 +204,7 @@ export default {
 /* .van-step--finish .van-step__line{
   background-color: red
 } */
+.underline{
+  /* text-decoration:underline */
+}
 </style>
