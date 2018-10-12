@@ -6,7 +6,8 @@
       left-arrow
       @click-left="$backTo()"
     />
-    <div>
+    <van-loading v-if="loading"></van-loading>
+    <div v-if="!loading">
       <h4 style="padding-left:20px">{{companyname}}：</h4>
       <van-row style="padding:20px;padding-top:0px;margin-bottom:30px">
         <p>东家您好,您的{{year}}年{{month}}账期的评估报告如下：</p>
@@ -28,6 +29,7 @@
 export default {
   data(){
     return{
+      loading: false,
       show:false,
       report:[],
       companyname:""
@@ -37,6 +39,7 @@ export default {
     init(){
       console.log(this.$route)
       let _self = this
+      _self.loading = true
       let url = `api/store/customer/company/analysis/result`
       let config = {
         params:{
@@ -47,10 +50,11 @@ export default {
 
       function success(res){
         _self.report = res.data.data
+        _self.loading = false
       }
 
       function fail(err){
-
+        _self.loading = false
       }
 
       this.$Get(url, config, success, fail)

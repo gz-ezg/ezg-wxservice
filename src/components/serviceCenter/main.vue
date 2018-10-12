@@ -1,99 +1,103 @@
 <template>
   <div>
-    <van-row style="padding-bottom:45px">
-      <!-- #CC3300 -->
-      <van-row style="padding: 10px; background-color: #952f2a; border-bottom: 1px solid white;" >
-        <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}<van-icon name="arrow" /></center>
-      </van-row>
-      <div style="height:150px;padding: 10px; background-color: #952f2a; border-bottom: 1px solid #eeeeee;color: white" @click="open_detail()">
-        <van-row>
-          <van-row style="font-size:14px;line-height:14px;">
-            <van-col span="12" >
-              财务报表 {{year}}年{{month}}月
-            </van-col>
-            <van-col span="12" style="text-align:right">
-              <span>账务详情</span><van-icon name="arrow" style="font-size:12px"  />
-            </van-col>
-          </van-row>
-          <van-row style="margin-top:30px">
-              <center>
-                <div style="font-size:16px;padding-bottom:10px">月净利润(元)</div>
-                <div style="font-size:35px">{{accountTotal.yuelirun}}</div>
-              </center>
-            </van-row>
+    <!-- <keep-alive> -->
+    <van-loading v-if="loading" style="top:50vh;left:50vw"></van-loading>
+    <!-- <keep-alive> -->
+      <van-row style="padding-bottom:45px" v-if="!loading">
+        <!-- #CC3300 -->
+        <van-row style="padding: 10px; background-color: #952f2a; border-bottom: 1px solid white;" >
+          <center style="margin-left: 2%; color: white;font-weight:bold;" @click="open_select">{{showCompanyName}}<van-icon name="arrow" /></center>
         </van-row>
-      </div>
-      <van-row style="margin-top:5px;padding-top:5px;padding-bottom:5px;background-color: #fff;border-bottom: 1px solid white;font-size:14px">
-        <van-col span="6">
-          <center>
-            <div>月收入(元)</div>
-            <div>{{accountTotal.yueshouru}}</div>
-          </center>
-        </van-col>
-        <van-col span="6">
-          <center>
-            <div>货币资金(元)</div>
-            <div>{{accountTotal.huobizijin}}</div>
-          </center>
-        </van-col>
-        <van-col span="6">
-          <center>
-            <div>成本费用(元)</div>
-            <div>{{accountTotal.chengbenfeiyong}}</div>
-          </center>
-        </van-col>
-        <van-col span="6">
-          <center>
-            <div>税金(元)</div>
-            <div>{{accountTotal.shuijin}}</div>
-          </center>
-        </van-col>
+        <div style="height:150px;padding: 10px; background-color: #952f2a; border-bottom: 1px solid #eeeeee;color: white" @click="open_detail()">
+          <van-row>
+            <van-row style="font-size:14px;line-height:14px;">
+              <van-col span="12" >
+                财务报表 {{year}}年{{month}}月
+              </van-col>
+              <van-col span="12" style="text-align:right">
+                <span>账务详情</span><van-icon name="arrow" style="font-size:12px"  />
+              </van-col>
+            </van-row>
+            <van-row style="margin-top:30px">
+                <center>
+                  <div style="font-size:16px;padding-bottom:10px">月净利润(元)</div>
+                  <div style="font-size:35px">{{accountTotal.yuelirun}}</div>
+                </center>
+              </van-row>
+          </van-row>
+        </div>
+        <van-row style="margin-top:5px;padding-top:5px;padding-bottom:5px;background-color: #fff;border-bottom: 1px solid white;font-size:14px">
+          <van-col span="6">
+            <center>
+              <div>月收入(元)</div>
+              <div>{{accountTotal.yueshouru}}</div>
+            </center>
+          </van-col>
+          <van-col span="6">
+            <center>
+              <div>货币资金(元)</div>
+              <div>{{accountTotal.huobizijin}}</div>
+            </center>
+          </van-col>
+          <van-col span="6">
+            <center>
+              <div>成本费用(元)</div>
+              <div>{{accountTotal.chengbenfeiyong}}</div>
+            </center>
+          </van-col>
+          <van-col span="6">
+            <center>
+              <div>税金(元)</div>
+              <div>{{accountTotal.shuijin}}</div>
+            </center>
+          </van-col>
+        </van-row>
+        <van-cell-group style="margin-top:10px">
+          <van-cell value="详情" is-link @click="open_report" style="line-height:24px">
+            <span slot="title">企业风险评估报告 <span style="font-size:10px;color:red" v-if="isNew">new</span></span>
+          </van-cell>
+        </van-cell-group>
+        <van-cell-group style="margin-top:10px">
+          <van-cell title="综合服务中心" style="font-size:18px;font-weight:bold" />
+          <van-collapse v-model="activeNames">
+            <van-collapse-item name="commercial">
+              <div slot="title">商事服务({{commercialWorkOrder.length}})</div>
+              <div slot="default">
+                  <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
+                    <div @click="open_workorder_detail(item.workorderId)">
+                      <van-row style="margin-bottom:5px">
+                        <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow"  /></van-col>
+                      </van-row>
+                      <van-row style="margin-top:5px">
+                        <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                      </van-row>
+                    </div>
+                  </van-row>
+              </div>
+            </van-collapse-item>
+            <van-collapse-item name="plan">
+              <div slot="title">企划服务({{planWorkOrder.length}})</div>
+              <div slot="default">
+                  <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
+                    <div @click="open_workorder_detail(item.workorderId)">
+                      <van-row style="margin-bottom:5px">
+                        <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow"  /></van-col>
+                      </van-row>
+                      <van-row style="margin-top:5px">
+                        <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                      </van-row>
+                    </div>
+                  </van-row>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+        </van-cell-group>
       </van-row>
-      <van-cell-group style="margin-top:10px">
-        <van-cell value="详情" is-link @click="open_report" style="line-height:24px">
-          <span slot="title">企业风险评估报告 <span style="font-size:10px;color:red" v-if="isNew">new</span></span>
-        </van-cell>
-      </van-cell-group>
-      <van-cell-group style="margin-top:10px">
-        <van-cell title="综合服务中心" style="font-size:18px;font-weight:bold" />
-        <van-collapse v-model="activeNames">
-          <van-collapse-item name="commercial">
-            <div slot="title">商事服务({{commercialWorkOrder.length}})</div>
-            <div slot="default">
-                <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in commercialWorkOrder" :key="index">
-                  <div @click="open_workorder_detail(item.workorderId)">
-                    <van-row style="margin-bottom:5px">
-                      <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                      <van-col span="12" style="text-align:right;font-size:10px"><span >详情</span><van-icon name="arrow"  /></van-col>
-                    </van-row>
-                    <van-row style="margin-top:5px">
-                      <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                      <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
-                    </van-row>
-                  </div>
-                </van-row>
-            </div>
-          </van-collapse-item>
-          <van-collapse-item name="plan">
-            <div slot="title">企划服务({{planWorkOrder.length}})</div>
-            <div slot="default">
-                <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
-                  <div @click="open_workorder_detail(item.workorderId)">
-                    <van-row style="margin-bottom:5px">
-                      <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
-                      <van-col span="12" style="text-align:right;font-size:10px"><span>详情</span><van-icon name="arrow"  /></van-col>
-                    </van-row>
-                    <van-row style="margin-top:5px">
-                      <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                      <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
-                    </van-row>
-                  </div>
-                </van-row>
-            </div>
-          </van-collapse-item>
-        </van-collapse>
-      </van-cell-group>
-    </van-row>
+    <!-- </keep-alive> -->
     <van-dialog
       v-model="select_company"
       :show-confirm-button="false"
@@ -115,7 +119,9 @@
       <van-tabbar-item icon="info-o" to="/">我的服务</van-tabbar-item>
       <van-tabbar-item icon="contact" url="http://m.zgcfo.com/center.html">个人中心</van-tabbar-item>
     </van-tabbar> -->
+    <!-- </keep-alive> -->
   </div>
+
 </template>
 
 
@@ -123,6 +129,7 @@
 export default {
   data(){
     return{
+      loading: false,
       year:"",
       month:"",
       activetabbar:2,
@@ -204,6 +211,7 @@ export default {
     },
     get_company_list(){
       let _self = this
+      _self.loading = true
       let url = `api/store/customer/company/list`
       let config = {}
 
@@ -237,6 +245,7 @@ export default {
 
       function fail(err){
         console.log(err)
+        _self.loading = false
       }
 
       this.$Get(url, config, success, fail)
@@ -279,10 +288,12 @@ export default {
             }
           }
         }
+        _self.loading = false
       }
 
       function fail(err){
         console.log(err)
+        _self.loading = false
       }
 
       this.$Get(url, config, success, fail)
@@ -301,10 +312,12 @@ export default {
       function success(res){
         console.log(res.data.data)
         _self.accountTotal = res.data.data
+        _self.loading = false
       }
 
       function fail(err){
         _self.$toast.fail(err.data.msg)
+        _self.loading = false
       }
 
       this.$Get(url, config, success, fail)

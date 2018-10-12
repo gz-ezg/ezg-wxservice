@@ -11,8 +11,8 @@
         {{companyName}}
       </center>
     </van-row>
-
-    <van-row style="background-color: rgba(255, 240, 245,1);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA">
+    <van-loading v-if="loading" style="top:45vh;left:50vw;font-size:10vw"></van-loading>
+    <van-row style="background-color: rgba(255, 240, 245,1);padding:10px;margin:20px;font-size:14px;box-shadow: 5px 5px 13px #E6E8FA" v-if="!loading">
       <van-row style="border-bottom:1px solid #999;padding-bottom:5px">
         <van-col span="18">
           <van-row>
@@ -35,7 +35,7 @@
       </van-row>
     </van-row>
 
-    <van-steps direction="vertical" :active="activeIndex" active-color="#f60">
+    <van-steps direction="vertical" :active="activeIndex" active-color="#f60" v-if="!loading">
       <van-step v-for="(item, index) in workOrderList" :key="index">
         <van-row>
           <van-col span="6" >{{item.period}}</van-col>
@@ -44,7 +44,7 @@
           <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px" :class="{ underline: item.BS == 'Y'}">风险评估报告</span></van-col>
         </van-row>
       </van-step>
-      <van-row>
+      <van-row style="margin-top:10px">
         <div style="width:95%;font-size:14px;line-height:1em">
           <p>温馨提示：</p>
           <p style="margin:0;padding-bottom:2em;text-indent: 2em">历史的<span style="color:red">做账、报税、风险评估报告</span>可点击哦！</p>
@@ -60,6 +60,7 @@
 export default {
   data(){
     return{
+      loading: false,
       detail:{
         begin_period:"",
         companyname:"",
@@ -137,6 +138,7 @@ export default {
     init(){
       let _self = this
       let url = `api/store/customer/company/showCompanyProgressInfo`
+      _self.loading = true
       let config = {
         params:{
           companyId:_self.$route.params.companyid
@@ -152,9 +154,11 @@ export default {
             _self.activeIndex = i
           }
         }
+        _self.loading = false
       }
 
       function fail(err){
+        _self.loading = false
       }
 
       this.$Get(url, config, success, fail)

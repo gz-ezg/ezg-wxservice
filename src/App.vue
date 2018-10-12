@@ -1,6 +1,6 @@
 <template>
   <!-- <div id="app" :style="{height:height+'px',width:width+'px',top:top+'px'}" style="overflow-x: scroll;" :class="{table_style:istable}"> -->
-  <div id="app" :style="{height: height ,width: width,bottom:width }" style="overflow-x: scroll;" :class="{table_style:istable}">
+  <div id="app" :style="{height: height ,width: width,bottom:width }" :class="{table_style:istable}">
     <van-row  >
       <router-view/>
     </van-row>
@@ -131,8 +131,8 @@ export default {
   position: absolute;
   transform-origin: left bottom;
   left: 0;
-  overflow-y: scroll
-  /* overflow-x: hidden */
+  overflow-y: scroll;
+  overflow-x: none
   /* width: 603px;
   height: 375px;
   top: -375px; */

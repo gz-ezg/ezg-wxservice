@@ -6,6 +6,7 @@
         left-arrow
         @click-left="$backTo()"
       />
+      <van-loading v-if="loading" style="top:50vw;left:50vh"/>
     <!-- <van-row style="padding:10px">
       <van-row v-for="item in tableData" :key="item.id">
         <van-col span="20" style="font-size:16px;border:1px solid #636363;padding-left:12px;line-height:16px">{{item.name}}</van-col>
@@ -19,7 +20,7 @@
 
 
 
-    <div style="padding:10px">
+    <div style="font-size:12px" v-if="!loading">
       <table class="table table-striped table-bordered" v-if="this.$route.params.type == 'cash'">
       <thead>
         <tr>
@@ -54,15 +55,15 @@
         </tbody>
       </table>
 
-      <table class="table table-striped table-bordered" v-if="this.$route.params.type == 'balance'">
+      <table class="table table-striped table-bordered table-condensed" v-if="this.$route.params.type == 'balance'">
       <thead>
         <tr>
-          <th>资产</th>
-          <th>期末余额</th>
-          <th>年初余额</th>
-          <th>负债和所有者权益</th>
-          <th>期末余额</th>
-          <th>年初余额</th>
+          <th style="width:26%">资产</th>
+          <th style="width:12%">期末余额</th>
+          <th style="width:12%">年初余额</th>
+          <th style="width:26%">负债和所有者权益</th>
+          <th style="width:12%">期末余额</th>
+          <th style="width:12%">年初余额</th>
         </tr>
       </thead>
         <tbody >
@@ -85,11 +86,13 @@ export default {
   data(){
     return{
       tableData:[],
+      loading: false
     }
   },
   methods:{
     get_table_data(){
       let _self = this
+      _self.loading = true
       // let url = `http://192.168.0.220:8888/Mock/simple?projectID=1&uri=/store/findCompanyReportInfo`
       let url = `api/store/findCompanyReportInfo`
 
@@ -107,9 +110,11 @@ export default {
       function success(res){
         console.log(res.data.data)
         _self.tableData = res.data.data
+        _self.loading = false
       }
 
       function fail(err){
+        _self.loading = false
         console.log(err)
       }
 

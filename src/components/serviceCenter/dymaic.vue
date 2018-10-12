@@ -13,11 +13,18 @@
                 </van-swipe-item>
             </van-swipe>
         </van-row>
-        <van-steps direction="vertical" :active="activeIndex" active-color="#f60" style="margin-top:20px;margin-bottom:60px">
+        <center>
+          <van-loading v-if="loading" style="top:5vh"></van-loading>
+        </center>
+        <van-steps direction="vertical" :active="activeIndex" active-color="#f60" style="margin-top:20px;margin-bottom:60px" v-if="!loading">
             <van-step v-for="item in workOrderList" :key="item.id">
                 <van-row >
                 <van-col span="10" >{{item.PROCESS}}</van-col>
                 <van-col span="10" ><span>{{item.enddate}}</span></van-col>
+                </van-row>
+                <!-- 此处放置服务总结 -->
+                <van-row v-if="item.PROCESS" style="margin-top:5px">
+                <van-col span="24" >{{item.PROCESS}}</van-col>
                 </van-row>
             </van-step>
         </van-steps>
@@ -29,6 +36,7 @@
 export default {
   data(){
     return {
+      loading: false,
       companyName:"",
       activeIndex:0,
       workOrderList:[
@@ -62,6 +70,7 @@ export default {
     },
     init(){
       let _self = this
+      _self.loading = true
       let id = this.$route.params.workOrderId
 
       let url = `api/store/customer/company/work/order/detail`
@@ -77,6 +86,7 @@ export default {
         _self.activeIndex = ""
         _self.workOrderList = []
         _self.workOrderList = res.data.data
+        _self.companyName = res.data.data[0].companyname
         for(let i = 0;i<_self.workOrderList.length;i++){
 
           if(_self.workOrderList[i].enddate){
@@ -87,9 +97,11 @@ export default {
             _self.workOrderList[i].enddate = "服务中"
           }
         }
+        _self.loading = false
       }
 
       function fail(err){
+        _self.loading = false
         console.log(err)
       }
 
