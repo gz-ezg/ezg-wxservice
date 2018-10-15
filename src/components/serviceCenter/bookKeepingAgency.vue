@@ -125,6 +125,7 @@ export default {
     open_zuozhang(e){
       let _self = this
       if(e.id == ""){
+        _self.$toast.fail("此账期数据未取回！")
         return
       }
       this.$router.push({

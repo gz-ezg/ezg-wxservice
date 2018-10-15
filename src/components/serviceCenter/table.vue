@@ -58,10 +58,10 @@
       <table class="table table-striped table-bordered table-condensed" v-if="this.$route.params.type == 'balance'">
       <thead>
         <tr>
-          <th style="width:26%">资产</th>
+          <th style="width:25%">资产</th>
           <th style="width:12%">期末余额</th>
           <th style="width:12%">年初余额</th>
-          <th style="width:26%">负债和所有者权益</th>
+          <th style="width:27%">负债和所有者权益</th>
           <th style="width:12%">期末余额</th>
           <th style="width:12%">年初余额</th>
         </tr>

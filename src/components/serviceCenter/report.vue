@@ -6,7 +6,7 @@
       left-arrow
       @click-left="$backTo()"
     />
-    <van-loading v-if="loading"></van-loading>
+    <van-loading v-if="loading" style="top:10vh;left:45vw"></van-loading>
     <div v-if="!loading">
       <h4 style="padding-left:20px">{{companyname}}：</h4>
       <van-row style="padding:20px;padding-top:0px;margin-bottom:30px">

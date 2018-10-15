@@ -22,7 +22,9 @@ Vue.use(VueBus)
 axios.interceptors.response.use(
     (response) => {
         if(response.data.msgCode == "50003"){
-
+          router.push({
+            name:'login'
+          })
         }else if(response.data.msgCode == '60000'){
 
 		}else{

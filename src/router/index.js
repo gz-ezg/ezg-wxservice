@@ -30,6 +30,12 @@ import customerComfirm from 'base/source/customer_comfirm'
 import comfirmSuccess from 'base/source/comfirm_success'
 import comfirmFail from 'base/source/comfirm_fail'
 
+//  项目方案
+import project from 'base/serviceCenter/project/index'
+
+//  企业荣誉
+import honorIndex from 'base/serviceCenter/honor/index'
+
 
 
 Vue.use(Router)
@@ -128,6 +134,18 @@ export default new Router({
       path: '/comfirmFail',
       name: "comfirm_fail",
       component: comfirmFail
+    },
+    //  项目
+    {
+      path: '/project/:companyid',
+      name: 'project',
+      component: project
+    },
+    //  荣誉
+    {
+      path: '/honor/index/:companyid',
+      name: 'honorIndex',
+      component: honorIndex
     },
     {
       path: '/',

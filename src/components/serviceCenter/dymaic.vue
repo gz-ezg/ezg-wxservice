@@ -23,8 +23,8 @@
                 <van-col span="10" ><span>{{item.enddate}}</span></van-col>
                 </van-row>
                 <!-- 此处放置服务总结 -->
-                <van-row v-if="item.PROCESS" style="margin-top:5px">
-                <van-col span="24" >{{item.PROCESS}}</van-col>
+                <van-row v-if="item.backup" style="margin-top:5px;font-size:12px">
+                <van-col span="22" ><div style="width:100%;word-wrap:break-word; word-break: normal; ">{{item.backup}}</div></van-col>
                 </van-row>
             </van-step>
         </van-steps>

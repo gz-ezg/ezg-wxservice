@@ -52,11 +52,44 @@
             </center>
           </van-col>
         </van-row>
-        <van-cell-group style="margin-top:10px">
+
+        <van-row style="margin-top:10px;padding-top:15px;padding-bottom:15px;background-color: #fff;border-bottom: 1px solid white;font-size:14px">
+          <div @click="open_honor">
+            <van-col span="8">
+              <center>
+                <div style="padding-bottom:10px">
+                  <van-icon name="wap-home" style="font-size:30px;color:#952f2a"></van-icon>
+                </div>
+                <span>企业荣誉</span>
+              </center>
+            </van-col>
+          </div>
+          <div @click="open_project">
+            <van-col span="8">
+              <center>
+                <div style="padding-bottom:10px">
+                  <van-icon name="exchange" style="font-size:30px;color:#952f2a"></van-icon>
+                </div>
+                <span>项目方案</span>
+              </center>
+            </van-col>
+          </div>
+          <div @click="open_report">
+            <van-col span="8">
+              <center>
+                <div style="padding-bottom:10px">
+                  <van-icon name="records" style="font-size:30px;color:#952f2a"></van-icon>
+                </div>
+                <span >账务评估</span>
+              </center>
+            </van-col>
+          </div>
+        </van-row>
+        <!-- <van-cell-group style="margin-top:10px">
           <van-cell value="详情" is-link @click="open_report" style="line-height:24px">
             <span slot="title">企业风险评估报告 <span style="font-size:10px;color:red" v-if="isNew">new</span></span>
           </van-cell>
-        </van-cell-group>
+        </van-cell-group> -->
         <van-cell-group style="margin-top:10px">
           <van-cell title="综合服务中心" style="font-size:18px;font-weight:bold" />
           <van-collapse v-model="activeNames">
@@ -71,7 +104,7 @@
                       </van-row>
                       <van-row style="margin-top:5px">
                         <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                        <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px" v-if="item.service_end_time">预计完成时间:{{item.service_end_time}}</van-col>
                       </van-row>
                     </div>
                   </van-row>
@@ -80,7 +113,7 @@
             <van-collapse-item name="plan">
               <div slot="title">企划服务({{planWorkOrder.length}})</div>
               <div slot="default">
-                  <van-row style="-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
+                  <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;" v-for="(item,index) in planWorkOrder" :key="index">
                     <div @click="open_workorder_detail(item.workorderId)">
                       <van-row style="margin-bottom:5px">
                         <van-col span="12" style="font-size:12px">{{item.product}}</van-col>
@@ -88,7 +121,7 @@
                       </van-row>
                       <van-row style="margin-top:5px">
                         <van-col span="12" style="font-size:12px">目前进度: <span style="font-size:14px;color:red">{{item.CurrentProcess}}</span></van-col>
-                        <van-col span="12" style="text-align:right;font-size:10px">预计完成时间:{{item.service_end_time}}</van-col>
+                        <van-col span="12" style="text-align:right;font-size:10px" v-if="item.service_end_time">预计完成时间:{{item.service_end_time}}</van-col>
                       </van-row>
                     </div>
                   </van-row>
@@ -160,10 +193,14 @@ export default {
       this.month = date.getMonth()
       if(this.month == 0){
         this.year = this.year - 1
+        this.month = 11
+      }
+      if(this.month == 1){
+        this.year = this.year - 1
         this.month = 12
       }
       if(this.month<=10){
-        this.month = "0"+this.month
+        this.month = "0" + (this.month - 1).toString()
       }
     },
     open_select(){
@@ -191,12 +228,31 @@ export default {
     //  打开企业风险评估
     open_report(){
       let _self = this
-      let period = _self.year + _self.month
+      let period = _self.year.toString() + _self.month.toString()
       this.$router.push({
         name:"report",
         params:{
           companyid: _self.select_company_id,
           period: period
+        }
+      })
+    },
+    open_project(){
+      let _self = this
+      _self.$toast.fail("方案模块正在努力开发中...")
+      // this.$router.push({
+      //   name: "project",
+      //   params: {
+      //     companyid: _self.select_company_id
+      //   }
+      // })
+    },
+    open_honor(){
+      let _self = this
+      this.$router.push({
+        name: "honorIndex",
+        params: {
+          companyid: _self.select_company_id
         }
       })
     },
