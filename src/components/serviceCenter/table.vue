@@ -97,15 +97,15 @@ export default {
       let url = `api/store/findCompanyReportInfo`
 
       let config = {
-        params:{
-          companyId:_self.$route.params.companyid,
-          period: _self.$route.params.period,
-          type: _self.$route.params.type
-          // companyId: '33784',
-          // period: '201805',
-          // type: _self.$route.params.type
+          params:{
+            companyId:_self.$route.params.companyid,
+            period: _self.$route.params.period,
+            type: _self.$route.params.type
+            // companyId: '33784',
+            // period: '201805',
+            // type: _self.$route.params.type
+          }
         }
-      }
 
       function success(res){
         console.log(res.data.data)

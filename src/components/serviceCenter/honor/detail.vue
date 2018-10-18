@@ -1,13 +1,13 @@
 <template>
   <div>
-    <van-popup v-model="honorShow" style="width:100vw;height:100vh">
+    <van-popup v-model="honorShow" style="width:100%;height:100%">
       <van-nav-bar class="navBarStyle" title="企业荣誉" @click-left="honorShow=false">
         <div slot="left"><van-icon name="close" /></div>
       </van-nav-bar>
       <van-loading v-if="loading" style="top:10vh;left:45vw"></van-loading>
       <van-cell v-for="(item,index) in data" :key="index" v-if="!loading">
           <div v-if="type=='ry'">
-            <van-row v-for="(item, index) in data" :key="index" style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
+            <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
               <van-col span="24" style="font-size:16px;font-weight:900">{{item.XMMC}}</van-col>
               <van-col span="16" v-if="item.XMLB != '          '">{{item.XMLB}}</van-col>
               <van-col span="16" v-if="item.XMLB == '          '" style="visibility:hidden">1</van-col>
@@ -16,14 +16,14 @@
             </van-row>
           </div>
           <div v-if="type=='zl'">
-            <van-row v-for="(item, index) in data" :key="index" style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
+            <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
               <van-col span="24" style="font-size:16px;font-weight:900">{{item.MC}}</van-col>
               <van-col span="12">{{item.Type}}</van-col>
               <van-col span="12" style="text-align:right">{{item.SQRQ}}</van-col>
             </van-row>
           </div>
           <div v-if="type=='rz'">
-            <van-row v-for="(item, index) in data" :key="index" style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
+            <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
               <van-col span="24" style="font-size:16px;font-weight:900">{{item.SoftName}}</van-col>
               <van-col span="12">{{item.SoftID}}</van-col>
               <van-col span="10" style="text-align:right">{{item.TypeNum}}</van-col>
@@ -31,7 +31,7 @@
             </van-row>
           </div>
           <div v-if="type=='sb'">
-            <van-row v-for="(item, index) in data" :key="index" style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
+            <van-row style="padding-bottom:5px;border-bottom: 1px solid #ccc;padding-bottom:5px;padding-top:5px;line-height:1.7em" gutter="20">
               <van-row>
                 <van-col span="6">
                   <img :src="item.ImageUrl">
@@ -45,6 +45,7 @@
             </van-row>
           </div>
         </van-cell>
+        <van-row><center style="padding-bottom:10px">没有更多了！</center></van-row>
     </van-popup>
   </div>
 </template>
@@ -68,8 +69,10 @@ export default {
       let config = {
         params: {
           type: type,
-          // companyId: companyId
-          companyId: 33744
+          companyId: companyId,
+          // companyId: 33744,
+          page: 1,
+          pageSize: 1000
         }
       }
 
@@ -91,6 +94,7 @@ export default {
     let _self = this
     _self.$bus.off("OPEN_HONOR_DETAIL", true)
     _self.$bus.on("OPEN_HONOR_DETAIL", (e)=>{
+      // console.log("111")
       _self.get_data(e.companyId, e.type)
       _self.type = e.type
       _self.honorShow = true

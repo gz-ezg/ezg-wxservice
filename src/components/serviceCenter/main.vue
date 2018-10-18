@@ -218,12 +218,21 @@ export default {
     //  打开服务详情
     open_detail(){
       let _self = this
-      this.$router.push({
-        name:'bookKeepingAgeny',
-        params:{
-          companyid:_self.select_company_id
-        }
-      })
+      if(_self.select_company_id == "33742"){
+        this.$router.push({
+          name:'bookKeepingAgeny',
+          params:{
+            companyid: "35384"
+          }
+        })
+      }else{
+        this.$router.push({
+          name:'bookKeepingAgeny',
+          params:{
+            companyid:_self.select_company_id
+          }
+        })
+      }
     },
     //  打开企业风险评估
     open_report(){

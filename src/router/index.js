@@ -14,6 +14,8 @@ import login from 'base/login/login'
 import mobileBind from 'base/login/bindMobile'
 import complain from 'base/common/complain'
 
+//  我的服务start
+
 import serviceCenterIndex from 'base/serviceCenter/main'
 
 import bookKeepingAgeny from 'base/serviceCenter/bookKeepingAgency'
@@ -25,18 +27,23 @@ import baoShui from 'base/serviceCenter/baoshui'
 import report from 'base/serviceCenter/report'
 import table from 'base/serviceCenter/table'
 
-//  资料管理
-import customerComfirm from 'base/source/customer_comfirm'
-import comfirmSuccess from 'base/source/comfirm_success'
-import comfirmFail from 'base/source/comfirm_fail'
-
 //  项目方案
 import project from 'base/serviceCenter/project/index'
 
 //  企业荣誉
 import honorIndex from 'base/serviceCenter/honor/index'
 
+//  我的服务end
 
+//  资料交接start
+import customerComfirm from 'base/source/customer_comfirm'
+import comfirmSuccess from 'base/source/comfirm_success'
+import comfirmFail from 'base/source/comfirm_fail'
+//  资料交接end
+
+//  个人中心start
+
+//  个人中心end
 
 Vue.use(Router)
 

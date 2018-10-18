@@ -16,7 +16,8 @@
       <van-row style="background-color: #fff;line-height:2em">
         <!-- 此处跳转待定 -->
         <center @click="open_resolve" v-if="data.isNewHigh == 'Y'">
-          <a href="#" style="text-decoration:none">恭喜您，您是高新企业，点击获得<span style="color:red;">高新财务解决方案</span></a>
+          <!-- <a href="#" style="text-decoration:none">恭喜您，您是高新企业，点击获得<span style="color:red;">高新财务解决方案</span></a>-->
+          <a href="#" style="text-decoration:none">恭喜您，您是高新企业</a>
         </center>
       </van-row>
       <van-collapse v-model="activeNames">
@@ -132,8 +133,8 @@ export default {
 
       let config = {
         params:{
-          // companyId: e
-          companyId: "33744"
+          companyId: e
+          // companyId: "33744",
         }
       }
 
