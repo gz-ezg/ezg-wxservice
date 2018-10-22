@@ -35,15 +35,33 @@ import honorIndex from 'base/serviceCenter/honor/index'
 
 //  我的服务end
 
-//  资料交接start
+
+
+//  个人中心start
+import myCenter from 'base/personCenter/index'
+import updateUserInfo from 'base/personCenter/updateUserInfo'
+//  个人中心end
+import orderIndex from 'base/order/index'
+import kimsIndex from 'base/kims/index'
+import recommendedIndex from 'base/recommended/index'
+
+//  发票
+import invoiceIndex from 'base/invoice/index'
+import invoiceList from 'base/invoice/list'
+import invoiceCreate from 'base/invoice/create'
+
+//  资料start
+import sourceIndex from 'base/source/index'
+import sourceList from 'base/source/list'
+import unFinishedList from 'base/source/unFinishedList'
+
+//  交接
 import customerComfirm from 'base/source/customer_comfirm'
 import comfirmSuccess from 'base/source/comfirm_success'
 import comfirmFail from 'base/source/comfirm_fail'
-//  资料交接end
+//  资料end
+import aboutIndex from 'base/about/index'
 
-//  个人中心start
-
-//  个人中心end
 
 Vue.use(Router)
 
@@ -55,28 +73,7 @@ export default new Router({
     //   name: 'getUserInfo',
     //   component: getUserInfo
     // },
-    {
-      path:'/complain/:id/:product',
-      name:'complain',
-      component: complain
-    },
-    {
-      path:'/servicecenterindex',
-      name:'serviceCenterIndex',
-      component: serviceCenterIndex,
-      beforeEnter: (to, from, next) => {
-        console.log(to)
-        console.log(from)
-        if(from.name){
-          // console.log("路由存在！")
-        }else{
-          // console.log("路由不存在！")
-          localStorage.clear()
-        }
-        next()
-      },
-    },
-
+    //  登录start
     {
       path:'/login',
       name: 'login',
@@ -87,7 +84,34 @@ export default new Router({
       name: 'mobileBind',
       component: mobileBind
     },
-
+    //  登录end
+    {
+      //  关于我们
+      path: '/about',
+      name: 'aboutIndex',
+      component: aboutIndex
+    },
+    {
+      path:'/complain/:id/:product',
+      name:'complain',
+      component: complain
+    },
+    {
+      path:'/servicecenterindex',
+      name:'serviceCenterIndex',
+      component: serviceCenterIndex,
+      beforeEnter: (to, from, next) => {
+        // console.log(to)
+        // console.log(from)
+        if(from.name){
+          // console.log("路由存在！")
+        }else{
+          // console.log("路由不存在！")
+          localStorage.clear()
+        }
+        next()
+      },
+    },
     {
       path:'/bookkeepingageny/:companyid',
       name: 'bookKeepingAgeny',
@@ -123,6 +147,58 @@ export default new Router({
       name: 'report',
       component: report
     },
+
+    //  项目
+    {
+      path: '/project/:companyid',
+      name: 'project',
+      component: project
+    },
+    //  荣誉
+    {
+      path: '/honor/index/:companyid',
+      name: 'honorIndex',
+      component: honorIndex
+    },
+    //  个人中心
+    {
+      path: '/myCenter',
+      name: "personCenterIndex",
+      component: myCenter
+    },
+    {
+      path: '/updateUserInfo',
+      name: "updateUserInfo",
+      component: updateUserInfo
+    },
+    //  我的发票
+    {
+      path: '/invoice',
+      component: invoiceIndex,
+      children: [
+        {
+          path: 'list',
+          name: "invoiceList",
+          component: invoiceList
+        },
+        {
+          path: "create",
+          name: "invoiceCreate",
+          component: invoiceCreate,
+          meta: {
+            title: "E帐柜-开发票"
+          }
+        },
+        {
+          path: '/',
+          redirect: {
+            name: 'invoiceList'
+          }
+        }
+      ]
+    },
+    //  我的文件
+
     //  资料相关部分
     //  确认页
     {
@@ -142,17 +218,28 @@ export default new Router({
       name: "comfirm_fail",
       component: comfirmFail
     },
-    //  项目
+    //  个人中心资料入口
     {
-      path: '/project/:companyid',
-      name: 'project',
-      component: project
-    },
-    //  荣誉
-    {
-      path: '/honor/index/:companyid',
-      name: 'honorIndex',
-      component: honorIndex
+      path: '/source',
+      component: sourceIndex,
+      children: [
+        {
+          path: 'list',
+          name: 'sourceList',
+          component: sourceList
+        },
+        {
+          path: 'unFinishedList',
+          name: 'unFinishedList',
+          component: unFinishedList
+        },
+        {
+          path: '/',
+          redirect: {
+            name: 'unFinishedList'
+          }
+        }
+      ]
     },
     {
       path: '/',

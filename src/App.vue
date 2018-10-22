@@ -137,4 +137,11 @@ export default {
   height: 375px;
   top: -375px; */
 }
+.navBarCommonStyle{
+  background-color: #952f2a!important;
+  color:white
+}
+.van-nav-bar__text{
+  color:white!important;
+}
 </style>

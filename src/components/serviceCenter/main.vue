@@ -146,14 +146,14 @@
       </van-radio-group>
     </van-dialog>
     <!--  暂时关闭  -->
-    <!-- <van-tabbar v-model="activetabbar" fixed>
-      <van-tabbar-item icon="home" url="http://m.zgcfo.com/">首页</van-tabbar-item>
-      <van-tabbar-item icon="chat" url="http://www16.53kf.com/m.php?cid=72151061">在线咨询</van-tabbar-item>
-      <van-tabbar-item icon="info-o" to="/">我的服务</van-tabbar-item>
-      <van-tabbar-item icon="contact" url="http://m.zgcfo.com/center.html">个人中心</van-tabbar-item>
-    </van-tabbar> -->
+    <van-tabbar v-model="active" fixed>
+      <!-- <van-tabbar-item icon="home" url="http://m.zgcfo.com/">首页</van-tabbar-item>
+      <van-tabbar-item icon="chat" url="http://www16.53kf.com/m.php?cid=72151061">在线咨询</van-tabbar-item> -->
+      <van-tabbar-item icon="wap-home" to="/servicecenterindex">我的服务</van-tabbar-item>
+      <van-tabbar-item icon="contact" to="/myCenter">个人中心</van-tabbar-item>
+    </van-tabbar>
     <!-- </keep-alive> -->
-  </div>
+    </div>
 
 </template>
 
@@ -162,6 +162,7 @@
 export default {
   data(){
     return{
+      active: 0,
       loading: false,
       year:"",
       month:"",
