@@ -81,6 +81,7 @@ Vue.prototype.$Post = function(url,config,success,fail){
 }
 
 //	数据字典请求接口
+//  需要针对store搞一个数据字典
 Vue.prototype.$GetDataCenter = function(params, finish){
     let _self = this
     let config = {

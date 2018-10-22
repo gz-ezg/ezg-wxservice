@@ -114,6 +114,9 @@ export default {
           clearInterval(time1)
           _self.yzmDisable = false
         }
+        _self.$once('hook:beforeDestroy', () => {            
+          clearInterval(time1);                                    
+        })
       },1000)
     },
     change_button(){
