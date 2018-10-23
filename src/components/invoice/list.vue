@@ -8,7 +8,16 @@
     </van-row>
     <van-row v-else>
       <van-loading style="top:5vh;left:45vw" v-if="loading"></van-loading>
-      <van-row v-else></van-row>
+      <van-row v-else>
+        <van-cell-group>
+          <van-list v-for="(item, index) in allInvoice" :key="index">
+            <div>
+              <van-cell :title="item.enterprise_name" :value="item.invoice_content" :label="item.receiver + ' - ' + item.express_type" />
+            </div>
+          </van-list>
+          <center style="line-height:3em">- 这里是底部 -</center>
+        </van-cell-group>
+      </van-row>
     </van-row>
   </div>
 </template>
@@ -28,11 +37,14 @@ export default {
       let _self = this
       let url = `api/store/customer/customerInvoiceList`
       let config = {
-
+        params:{
+          page: 1,
+          pageSize: 1000
+        }
       }
 
       function success(res){
-
+        _self.allInvoice = res.data.data.rows
       }
 
       this.$Get(url, config, success)
@@ -44,7 +56,10 @@ export default {
     }
   },
   created(){
+    let _self = this
+    _self.get_data()
     console.log(document.title)
   }
 }
 </script>
+

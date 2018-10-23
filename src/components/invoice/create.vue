@@ -110,7 +110,6 @@ export default {
         taxNum: { type: "string", required: true, message: "请输入纳税人识别号！" },
         invoiceContent: { type: "string", required: true, message: "请输入发票内容！" },
         taxMoney: { type: "string", required: true, message: "请输入开票金额！" },
-        expressType: { type: "string", required: true, message: "请输入领取方式！" },
       }
 
       if(_self.invoiceType == "普通发票"){
@@ -193,6 +192,7 @@ export default {
         receiver: _self.receiver,
         receiverMobile: _self.receiverMobile,
         receiverAddress: _self.receiverAddress,
+        deleteFlag: 0
       }
 
       function success(res){
