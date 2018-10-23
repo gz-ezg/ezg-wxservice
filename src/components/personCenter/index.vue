@@ -3,7 +3,7 @@
     <van-cell-group style="margin-bottom:5px">
       <div style="height:30vh;background-color: #952f2a" @click="update_info">
         <center style="padding-top:5vh;">
-            <img alt="暂无图片" :src="'/api/assets/'+ userInfo.head_img_url" style="width:100px;height:100px;border-radius:100px"/>
+            <img alt="暂无图片" :src="userInfo.head_img_url" style="width:100px;height:100px;border-radius:100px"/>
             <p style="color:#ccc;padding-top:10px;font-size:20px">{{userInfo.nickname ? userInfo.nickname : "用户名未设置"}}</p>
         </center>
       </div>
@@ -50,7 +50,9 @@ export default {
 
       function success(res){
         _self.userInfo = res.data.data
-        console.log(res.data.data)
+        if(_self.userInfo.head_img_url.indexOf("upload") == 0){
+          _self.userInfo.head_img_url = '/api/assets/'+ _self.userInfo.head_img_url
+        }
       }
 
       this.$Get(url, config, success)

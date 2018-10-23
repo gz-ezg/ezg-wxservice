@@ -25,7 +25,17 @@ export default {
   },
   methods: {
     get_data(){
+      let _self = this
+      let url = `api/store/customer/customerInvoiceList`
+      let config = {
 
+      }
+
+      function success(res){
+
+      }
+
+      this.$Get(url, config, success)
     },
     create_invoice(){
       this.$router.push({

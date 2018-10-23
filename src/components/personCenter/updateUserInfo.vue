@@ -11,7 +11,7 @@
     <van-cell-group style="margin-bottom:5px">
       <div style="height:30vh;background-color: #ccc">
         <center style="padding-top:5vh;">
-            <img :src="'/api/assets/'+ userInfo.head_img_url" style="width:100px;height:100px;border-radius:100px"/>
+            <img :src="userInfo.head_img_url" style="width:100px;height:100px;border-radius:100px"/>
               <div style="padding:20px">
                 <van-uploader accept="*" :before-read="update_icon">
                   <span>点击修改头像</span>
@@ -44,13 +44,14 @@
     <van-dialog
       v-model="show"
       :close-on-click-overlay="true"
+      @confirm="update_tel"
     >
       <van-field
         v-model="tel"
         label="手机号码"
         placeholder="请输入新的手机号码"
-        @confirm="update_tel"
-        
+
+
       />
       <van-field
         v-model="yzm"
@@ -94,6 +95,10 @@ export default {
       function success(res){
         _self.userInfo = res.data.data
         _self.userInfo.sex = _self.userInfo.sex.toString()
+        console.log(_self.userInfo.head_img_url.indexOf("upload"))
+        if(_self.userInfo.head_img_url.indexOf("upload") == 0){
+          _self.userInfo.head_img_url = '/api/assets/'+ _self.userInfo.head_img_url
+        }
       }
 
       this.$Get(url, config, success)
@@ -118,7 +123,24 @@ export default {
       this.$Post(url, formdata, success, fail)
     },
     update_tel(){
-      console.log("1111")
+      console.log("12121212")
+      let _self = this
+      let url = `api/store/customer/user/update/tel`
+
+      let config = {
+        tel: _self.tel,
+        code: _self.yzm
+      }
+
+      function success(res){
+        _self.get_user_info()
+      }
+
+      function fail(err){
+
+      }
+
+      this.$Post(url, config, success, fail)
     },
     is_mobile_number(){
       let _self = this
@@ -136,7 +158,7 @@ export default {
         console.log("手机号正确！")
         let url = `api/store/customer/user/update/tel/msg/send`
         let config = {
-          tel: _self.tel	
+          tel: _self.tel
         }
 
         function success(res){
@@ -165,13 +187,28 @@ export default {
           clearInterval(time1)
           _self.yzmDisable = false
         }
-        _self.$once('hook:beforeDestroy', () => {            
-          clearInterval(time1);                                    
+        _self.$once('hook:beforeDestroy', () => {
+          clearInterval(time1);
         })
       },1000)
     },
     update_info(){
-      console.log("1111")
+      let _self = this
+      let url = `api/store/customer/user/update`
+
+      let formdata = new FormData()
+      formdata.append("sex", _self.userInfo.sex)
+      formdata.append("nickname", _self.userInfo.nickname)
+
+      function success(res){
+        _self.get_user_info()
+      }
+
+      function fail(err){
+
+      }
+
+      this.$Post(url, formdata, success, fail)
     }
   },
   created(){
