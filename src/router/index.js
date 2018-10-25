@@ -186,7 +186,7 @@ export default new Router({
           name: "invoiceCreate",
           component: invoiceCreate,
           meta: {
-            title: "E帐柜-开发票"
+            title: "E账柜-开发票"
           }
         },
         {

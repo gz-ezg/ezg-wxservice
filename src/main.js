@@ -19,6 +19,16 @@ Vue.use(VueBus)
 
 //  登录拦截器
 
+axios.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  // config.data = "1111"
+  // console.log(config)
+  return config;
+}, function (error) {
+  // 对请求错误做些什么
+  return Promise.reject(error);
+});
+
 axios.interceptors.response.use(
     (response) => {
         if(response.data.msgCode == "50003"){
@@ -125,7 +135,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }else{
-    document.title = "E帐柜"
+    document.title = "E账柜"
   }
   next()
 })

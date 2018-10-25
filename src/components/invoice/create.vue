@@ -179,6 +179,7 @@ export default {
       _self.loading = true
 
       let config = {
+        invoiceType: _self.invoiceType,
         enterpriseName: _self.enterpriseName,
         taxNum: _self.taxNum,
         invoiceContent: _self.invoiceContent,
@@ -192,7 +193,8 @@ export default {
         receiver: _self.receiver,
         receiverMobile: _self.receiverMobile,
         receiverAddress: _self.receiverAddress,
-        deleteFlag: 0
+        deleteFlag: 0,
+        invoiceStatus: "applied"
       }
 
       function success(res){
