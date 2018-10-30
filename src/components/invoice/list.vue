@@ -12,7 +12,7 @@
         <van-cell-group>
           <van-list v-for="(item, index) in allInvoice" :key="index">
             <div>
-              <van-cell :title="item.enterprise_name" :value="item.invoice_content" :label="item.receiver + ' - ' + item.express_type" />
+              <van-cell :title="item.enterprise_name" :value="item.invoice_content" :label="item.invoice_status + ' - ' + item.express_type" />
             </div>
           </van-list>
           <center style="line-height:3em">- 这里是底部 -</center>
@@ -39,12 +39,24 @@ export default {
       let config = {
         params:{
           page: 1,
-          pageSize: 1000
+          pageSize: 1000,
+          sortField: "id"
         }
       }
 
       function success(res){
         _self.allInvoice = res.data.data.rows
+        for(let i = 0; i<_self.allInvoice.length; i++){
+          if(_self.allInvoice[i].invoice_status == "applied"){
+            _self.allInvoice[i].invoice_status = "未处理"
+          }else if(_self.allInvoice[i].invoice_status == "executing"){
+            _self.allInvoice[i].invoice_status = "处理中"
+          }else if(_self.allInvoice[i].invoice_status == "finished"){
+            _self.allInvoice[i].invoice_status = "已完成"
+          }else{
+            _self.allInvoice[i].invoice_status = "已取消"
+          }
+        }
       }
 
       this.$Get(url, config, success)
