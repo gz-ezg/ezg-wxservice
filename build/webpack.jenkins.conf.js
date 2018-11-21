@@ -13,7 +13,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = process.env.NODE_ENV === 'jenkins'
   ? require('../config/jenkins.env')
-  : require('../config/prod.env')
+  : require('../config/jenkins.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {

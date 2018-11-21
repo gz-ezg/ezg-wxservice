@@ -1,73 +1,100 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-// import searchList from '@/components/searchList'
-// import productDetail from '@/components/productDetail'
-// import chat from '@/components/chat'
-// import productList from '@/components/productList'
-// import cart from '@/components/cart'
-// import getUserInfo from '@/components/getUserInfo'
-// import orderList from '@/components/orderList'
-// import tel from '@/components/tel'
 
 import login from 'base/login/login'
 import mobileBind from 'base/login/bindMobile'
 import complain from 'base/common/complain'
 
 //  我的服务start
+const serviceCenterIndex = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/main')
+const bookKeepingAgeny = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/bookKeepingAgency')
+const dymaic = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/dymaic')
+const dataMemo = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/dataMemo')
+const zuoZhang = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/zuozhang')
+const baoShui = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/baoshui')
+const report = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/report')
+const table = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/table')
 
-import serviceCenterIndex from 'base/serviceCenter/main'
+// import serviceCenterIndex from 'base/serviceCenter/main'
 
-import bookKeepingAgeny from 'base/serviceCenter/bookKeepingAgency'
-import dymaic from 'base/serviceCenter/dymaic'
-import dataMemo from 'base/serviceCenter/dataMemo'
+// import bookKeepingAgeny from 'base/serviceCenter/bookKeepingAgency'
+// import dymaic from 'base/serviceCenter/dymaic'
+// import dataMemo from 'base/serviceCenter/dataMemo'
 
-import zuoZhang from 'base/serviceCenter/zuozhang'
-import baoShui from 'base/serviceCenter/baoshui'
-import report from 'base/serviceCenter/report'
-import table from 'base/serviceCenter/table'
+// import zuoZhang from 'base/serviceCenter/zuozhang'
+// import baoShui from 'base/serviceCenter/baoshui'
+// import report from 'base/serviceCenter/report'
+// import table from 'base/serviceCenter/table'
 
 //  项目方案
-import project from 'base/serviceCenter/project/index'
+const project = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/project/index')
+
+// import project from 'base/serviceCenter/project/index'
 
 //  企业荣誉
-import honorIndex from 'base/serviceCenter/honor/index'
+const honorIndex = () => import(/* webpackChunkName: "serviceCenter" */ 'base/serviceCenter/honor/index')
+
+// import honorIndex from 'base/serviceCenter/honor/index'
 
 //  我的服务end
 
-
-
 //  个人中心start
-import myCenter from 'base/personCenter/index'
-import updateUserInfo from 'base/personCenter/updateUserInfo'
+const myCenter = () => import(/* webpackChunkName: "myCenter" */ 'base/personCenter/index')
+const updateUserInfo = () => import(/* webpackChunkName: "myCenter" */ 'base/personCenter/updateUserInfo')
 //  个人中心end
-import orderIndex from 'base/order/index'
-import kimsIndex from 'base/kims/index'
-import recommendedIndex from 'base/recommended/index'
+const orderIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/order/index')
+const kimsIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/kims/index')
+const recommendedIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/recommended/index')
+
+// import myCenter from 'base/personCenter/index'
+// import updateUserInfo from 'base/personCenter/updateUserInfo'
+
+// import orderIndex from 'base/order/index'
+// import kimsIndex from 'base/kims/index'
+// import recommendedIndex from 'base/recommended/index'
 
 //  发票
-import invoiceIndex from 'base/invoice/index'
-import invoiceList from 'base/invoice/list'
-import invoiceCreate from 'base/invoice/create'
+const invoiceIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/invoice/index')
+const invoiceList = () => import(/* webpackChunkName: "myCenter" */ 'base/invoice/list')
+const invoiceCreate = () => import(/* webpackChunkName: "myCenter" */ 'base/invoice/create')
+
+// import invoiceIndex from 'base/invoice/index'
+// import invoiceList from 'base/invoice/list'
+// import invoiceCreate from 'base/invoice/create'
 
 //  资料start
-import sourceIndex from 'base/source/index'
-import sourceList from 'base/source/list'
-import unFinishedList from 'base/source/unFinishedList'
+const sourceIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/source/index')
+const sourceList = () => import(/* webpackChunkName: "myCenter" */ 'base/source/list')
+const unFinishedList = () => import(/* webpackChunkName: "myCenter" */ 'base/source/unFinishedList')
 
-//  交接
-import customerComfirm from 'base/source/customer_comfirm'
-import comfirmSuccess from 'base/source/comfirm_success'
-import comfirmFail from 'base/source/comfirm_fail'
+// import sourceIndex from 'base/source/index'
+// import sourceList from 'base/source/list'
+// import unFinishedList from 'base/source/unFinishedList'
+
+//  交接(免登陆措施)
+const customerComfirm = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/customer_comfirm')
+const comfirmSuccess = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/comfirm_success')
+const comfirmFail = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/comfirm_fail')
+
+// import customerComfirm from 'base/source/customer_comfirm'
+// import comfirmSuccess from 'base/source/comfirm_success'
+// import comfirmFail from 'base/source/comfirm_fail'
 //  资料end
 
-//  客户评价
-import returnVisitIndex from 'base/returnVisit/index'
-import returnWorkOrder from 'base/returnVisit/workOrder'
-import returnCycleWordOrder from 'base/returnVisit/cycleWordOrder'
-import returnVisitList from 'base/returnVisit/list'
+//  客户评价(免登陆措施)
+const returnVisitIndex = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/index')
+const returnWorkOrder = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/workOrder')
+const returnCycleWordOrder = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/cycleWordOrder')
+const returnVisitList = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/list')
 
-import aboutIndex from 'base/about/index'
+// import returnVisitIndex from 'base/returnVisit/index'
+// import returnWorkOrder from 'base/returnVisit/workOrder'
+// import returnCycleWordOrder from 'base/returnVisit/cycleWordOrder'
+// import returnVisitList from 'base/returnVisit/list'
+
+const aboutIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/about/index')
+
+// import aboutIndex from 'base/about/index'
 
 
 Vue.use(Router)
