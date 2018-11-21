@@ -6,7 +6,7 @@
         <van-cell-group>
           <van-list v-for="(item, index) in list" :key="index">
             <div @click="open_deal(item)">
-                <van-cell :title="item.applicant_name" :value="item.createdate.slice(0,10)" :label="item.connect_plan_name + ' - '+item.application_status_name" />
+                <van-cell :title="item.applicant_name" :value="item.createdate.slice(0,10)" :label="item.connect_plan_name" />
             </div>
           </van-list>
         </van-cell-group>
@@ -80,7 +80,7 @@ export default {
       this.$router.push({
           name:'customer_comfirm',
           params:{
-            id: ":" + e.id
+            id: e.id
           }
         })
     }

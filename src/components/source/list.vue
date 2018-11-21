@@ -6,7 +6,7 @@
         <van-cell-group>
         <van-list v-for="(item, index) in FilesList" :key="index">
           <div>
-              <van-cell :title="item.file_type_name" :value="item.file_num" :label="item.CompanyName" />
+              <van-cell :title="item.customer_file_name" :value="item.file_num" :label="item.CompanyName" />
           </div>
         </van-list>
         </van-cell-group>

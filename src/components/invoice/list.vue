@@ -40,7 +40,8 @@ export default {
         params:{
           page: 1,
           pageSize: 1000,
-          sortField: "id"
+          sortField: "id",
+          type: "1"
         }
       }
 

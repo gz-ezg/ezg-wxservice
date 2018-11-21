@@ -69,7 +69,10 @@ export default {
         _self.files = res.data.data.files
       }
 
-      this.$Get(url, config, success)
+      function fail(err){
+
+      }
+      this.$Get(url, config, success, fail)
     },
     disagree(){
       this.status = "N"
@@ -111,9 +114,10 @@ export default {
   created(){
     let _self = this
     let id = this.$route.params.id
-    _self.connectRequestId = (this.$route.params.id).slice(1)
+    // _self.connectRequestId = (this.$route.params.id).slice(1)
+    _self.connectRequestId = this.$route.params.id
     console.log(_self.connectRequestId)
-    this.get_source_data(id.slice(1))
+    this.get_source_data(id)
   }
 }
 </script>

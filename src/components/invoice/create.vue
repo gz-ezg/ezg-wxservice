@@ -179,6 +179,7 @@ export default {
       _self.loading = true
 
       let config = {
+        taxMemo: _self.taxMemo,
         invoiceType: _self.invoiceType,
         enterpriseName: _self.enterpriseName,
         taxNum: _self.taxNum,
@@ -194,7 +195,8 @@ export default {
         receiverMobile: _self.receiverMobile,
         receiverAddress: _self.receiverAddress,
         deleteFlag: 0,
-        invoiceStatus: "applied"
+        invoiceStatus: "applied",
+
       }
 
       function success(res){
@@ -213,6 +215,7 @@ export default {
         _self.receiver= ""
         _self.receiverMobile = ""
         _self.receiverAddress = ""
+        _self.taxMemo = ""
       }
 
       function fail(err){

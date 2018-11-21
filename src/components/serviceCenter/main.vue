@@ -20,8 +20,8 @@
             </van-row>
             <van-row style="margin-top:30px">
                 <center>
-                  <div style="font-size:16px;padding-bottom:10px">月净利润(元)</div>
-                  <div style="font-size:35px">{{accountTotal.yuelirun}}</div>
+                  <div style="font-size:16px;padding-bottom:10px">月净利润(万元)</div>
+                  <div style="font-size:35px">{{accountTotal.yuelirun|formatMoney}}</div>
                 </center>
               </van-row>
           </van-row>
@@ -29,26 +29,26 @@
         <van-row style="margin-top:5px;padding-top:5px;padding-bottom:5px;background-color: #fff;border-bottom: 1px solid white;font-size:14px">
           <van-col span="6">
             <center>
-              <div>月收入(元)</div>
-              <div>{{accountTotal.yueshouru}}</div>
+              <div>月收入(万元)</div>
+              <div>{{accountTotal.yueshouru|formatMoney}}</div>
             </center>
           </van-col>
           <van-col span="6">
             <center>
-              <div>货币资金(元)</div>
-              <div>{{accountTotal.huobizijin}}</div>
+              <div>货币资金(万元)</div>
+              <div>{{accountTotal.huobizijin|formatMoney}}</div>
             </center>
           </van-col>
           <van-col span="6">
             <center>
-              <div>成本费用(元)</div>
-              <div>{{accountTotal.chengbenfeiyong}}</div>
+              <div>成本费用(万元)</div>
+              <div>{{accountTotal.chengbenfeiyong|formatMoney}}</div>
             </center>
           </van-col>
           <van-col span="6">
             <center>
-              <div>税金(元)</div>
-              <div>{{accountTotal.shuijin}}</div>
+              <div>税金(万元)</div>
+              <div>{{accountTotal.zhenzhishui|formatMoney}}</div>
             </center>
           </van-col>
         </van-row>
@@ -177,7 +177,7 @@ export default {
       planWorkOrder:[],
       accountTotal:{
         huobizijin:0,
-        shuijin:0,
+        zhenzhishui:0,
         yuelirun:0,
         qitashuifei:0,
         yueshouru:0,
@@ -320,7 +320,7 @@ export default {
       this.commercialWorkOrder = []
       this.planWorkOrder = []
       this.accountTotal.huobizijin=0,
-      this.accountTotal.shuijin=0,
+      this.accountTotal.zhenzhishui=0,
       this.accountTotal.yuelirun=0,
       this.accountTotal.qitashuifei=0,
       this.accountTotal.yueshouru=0,
@@ -403,6 +403,11 @@ export default {
   // },
   watch:{
     'select_company_id':'get_account'
+  },
+  filters:{
+    formatMoney(e){
+      return (e/1e4).toFixed(2)
+    }
   }
 }
 </script>

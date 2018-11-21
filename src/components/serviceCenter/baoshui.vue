@@ -43,7 +43,7 @@
       </center>
     </van-row>
   <van-cell-group >
-    <van-cell icon="gold-coin" title="增值税" :value="accountTotal.shuijin" style="font-size:18px"/>
+    <van-cell icon="gold-coin" title="增值税" :value="accountTotal.zhenzhishui" style="font-size:18px"/>
     <van-cell icon="gold-coin" title="企业所得税" :value="accountTotal.qiyesuodeshui" style="font-size:18px"/>
     <van-cell icon="gold-coin" title="个税" :value="accountTotal.gerensuodeshui" style="font-size:18px"/>
     <van-cell icon="gold-coin" title="附加税" :value="accountTotal.qitashuifei" style="font-size:18px" />
@@ -89,10 +89,10 @@ export default {
       tel:"",
       companyName: "无",
       accountTotal:{
-        shuijin:"0元",
-        qiyesuodeshui:"0元",
-        gerensuodeshui:"0元",
-        qitashuifei:"0元"
+        zhenzhishui:"0.00元",
+        qiyesuodeshui:"0.00元",
+        gerensuodeshui:"0.00元",
+        qitashuifei:"0.00元"
       }
     }
   },
@@ -161,18 +161,18 @@ export default {
 
       function success(res){
         _self.accountTotal = res.data.data
-        _self.accountTotal.shuijin = _self.accountTotal.shuijin + " 元"
-        _self.accountTotal.qiyesuodeshui = _self.accountTotal.qiyesuodeshui + " 元"
-        _self.accountTotal.gerensuodeshui = _self.accountTotal.gerensuodeshui + " 元"
-        _self.accountTotal.qitashuifei = _self.accountTotal.qitashuifei + " 元"
+        _self.accountTotal.zhenzhishui = _self.accountTotal.zhenzhishui.toFixed(2) + " 元"
+        _self.accountTotal.qiyesuodeshui = _self.accountTotal.qiyesuodeshui.toFixed(2) + " 元"
+        _self.accountTotal.gerensuodeshui = _self.accountTotal.gerensuodeshui.toFixed(2) + " 元"
+        _self.accountTotal.qitashuifei = _self.accountTotal.qitashuifei.toFixed(2) + " 元"
 
       }
 
       function fail(err){
-        _self.accountTotal.shuijin = "0元"
-        _self.accountTotal.qiyesuodeshui = "0元"
-        _self.accountTotal.gerensuodeshui = "0元"
-        _self.accountTotal.qitashuifei = "0元"
+        _self.accountTotal.zhenzhishui = "0.00元"
+        _self.accountTotal.qiyesuodeshui = "0.00元"
+        _self.accountTotal.gerensuodeshui = "0.00元"
+        _self.accountTotal.qitashuifei = "0.00元"
         _self.$toast.fail(err.data.msg)
       }
 

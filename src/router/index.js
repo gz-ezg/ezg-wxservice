@@ -60,6 +60,13 @@ import customerComfirm from 'base/source/customer_comfirm'
 import comfirmSuccess from 'base/source/comfirm_success'
 import comfirmFail from 'base/source/comfirm_fail'
 //  资料end
+
+//  客户评价
+import returnVisitIndex from 'base/returnVisit/index'
+import returnWorkOrder from 'base/returnVisit/workOrder'
+import returnCycleWordOrder from 'base/returnVisit/cycleWordOrder'
+import returnVisitList from 'base/returnVisit/list'
+
 import aboutIndex from 'base/about/index'
 
 
@@ -101,8 +108,6 @@ export default new Router({
       name:'serviceCenterIndex',
       component: serviceCenterIndex,
       beforeEnter: (to, from, next) => {
-        // console.log(to)
-        // console.log(from)
         if(from.name){
           // console.log("路由存在！")
         }else{
@@ -237,6 +242,34 @@ export default new Router({
           path: '/',
           redirect: {
             name: 'unFinishedList'
+          }
+        }
+      ]
+    },
+    //  客户回访
+    {
+      path: '/returnVisit',
+      component: returnVisitIndex,
+      children: [
+        {
+          path: 'workOrder',
+          name: 'returnWorkOrder',
+          component: returnWorkOrder
+        },
+        {
+          path: 'cycleWordOrder',
+          name: 'returnCycleWordOrder',
+          component: returnCycleWordOrder
+        },
+        {
+          path: 'returnVisitList',
+          name: 'returnVisitList',
+          component: returnVisitList
+        },
+        {
+          path: '/',
+          redirect: {
+            name: 'returnVisitList'
           }
         }
       ]

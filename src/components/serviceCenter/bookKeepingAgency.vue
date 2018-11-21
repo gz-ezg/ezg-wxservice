@@ -159,6 +159,15 @@ export default {
       }
 
       function fail(err){
+        if(err.data.msg == "该公司没有周期性服务"){
+            setTimeout(()=>{
+              _self.$router.push({
+              name: "serviceCenterIndex"
+            })
+          },3000)
+        }else{
+
+        }
         _self.loading = false
       }
 
@@ -167,7 +176,6 @@ export default {
     get_base_info(){
       let _self = this
       let url = `api/store/customer/company/companyServiceInfo`
-
       let config = {
         params:{
           companyId:_self.$route.params.companyid
@@ -176,14 +184,11 @@ export default {
       }
 
       function success(res){
-        // console.log("1111111111")
-        // console.log(res.data.data[0])
         _self.tel = res.data.data.mobilePhone
         _self.detail = res.data.data
       }
 
       function fail(err){
-        // console.log(err)
       }
 
       this.$Get(url, config, success, fail)
@@ -192,9 +197,17 @@ export default {
   },
   created(){
     let _self = this
+    let temp = _self.$route.params.companyid
     this.companyName = localStorage.getItem("companyName")
-    this.get_base_info()
-    this.init()
+    // if( temp != 1){
+      this.get_base_info()
+      this.init()
+    // }else{
+    //   _self.$router.push({
+    //     name: "serviceCenterIndex"
+    //   })
+    // }
+
   },
   mounted(){
 
