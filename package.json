@@ -19,7 +19,7 @@
   "dependencies": {
     "async-validator": "^1.10.0",
     "axios": "^0.16.2",
-    "vant": "*",
+    "vant": "^1.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
