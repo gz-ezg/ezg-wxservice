@@ -37,11 +37,13 @@
 
     <van-steps direction="vertical" :active="activeIndex" active-color="#f60" v-if="!loading">
       <van-step v-for="(item, index) in workOrderList" :key="index">
-        <van-row>
+        <van-row type="flex" align="center">
           <van-col span="6" >{{item.period}}</van-col>
-          <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_baoshui(item)">报税 <van-icon name="search" v-if="item.BS=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.BS!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_zuozhang(item)">做账 <van-icon name="search" v-if="item.JZ=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.JZ!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col>
-          <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px" :class="{ underline: item.BS == 'Y'}">风险评估报告</span></van-col>
+          <!-- <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_baoshui(item)">报税 <van-icon name="search" v-if="item.BS=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.BS!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" :class="{ underline: item.BS == 'Y'}" @click="open_zuozhang(item)">做账 <van-icon name="search" v-if="item.JZ=='Y' || index <=activeIndex" style="font-size:14px;color:#ccc;line-height:1px;"/><van-icon name="clock" v-if="item.JZ!='Y' & index >activeIndex" style="font-size:14px;line-height:16px"/></span></van-col> -->
+          <van-col span="5" ><span style="line-height:21px" @click="open_baoshui(item)">报税<van-icon name="search" style="font-size:14px;color:#ccc;line-height:1px;margin-left:5px"/></span></van-col>
+          <van-col span="5" ><span style="line-height:21px" @click="open_zuozhang(item)">做账<van-icon name="search" style="font-size:14px;color:#ccc;line-height:1px;margin-left:5px"/></span></van-col>
+          <van-col span="8" ><span @click="open_report(item)" size="small" style="line-height:18px" >风险评估报告</span></van-col>
         </van-row>
       </van-step>
       <van-row style="margin-top:10px">
@@ -150,11 +152,19 @@ export default {
       function success(res){
         // console.log(res)
         _self.workOrderList = res.data.data.detail
+        _self.workOrderList.reverse()
         for(let i = 0;i<_self.workOrderList.length;i++){
-          if(_self.workOrderList[i].BS == "Y" && _self.workOrderList[i].JZ == "Y"){
-            _self.activeIndex = i
+          if(_self.workOrderList[i].id){
+            break;
+          }else{
+            _self.workOrderList.splice(i, 1)
           }
         }
+        // for(let i = _self.workOrderList.length - 1;i>0;i--){
+        //   // if(_self.workOrderList[i].BS == "Y" && _self.workOrderList[i].JZ == "Y"){
+        //   //   _self.activeIndex =
+        //   // }
+        // }
         _self.loading = false
       }
 

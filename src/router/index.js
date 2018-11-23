@@ -71,7 +71,7 @@ const unFinishedList = () => import(/* webpackChunkName: "myCenter" */ 'base/sou
 // import sourceList from 'base/source/list'
 // import unFinishedList from 'base/source/unFinishedList'
 
-//  交接(免登陆措施)
+//  交接(免登陆，独立成包)
 const customerComfirm = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/customer_comfirm')
 const comfirmSuccess = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/comfirm_success')
 const comfirmFail = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/source/comfirm_fail')
@@ -81,12 +81,12 @@ const comfirmFail = () => import(/* webpackChunkName: "sourceConfirm" */ 'base/s
 // import comfirmFail from 'base/source/comfirm_fail'
 //  资料end
 
-//  客户评价(免登陆措施)
+//  客户评价(免登陆，独立成包)
 const returnVisitIndex = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/index')
 const returnWorkOrder = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/workOrder')
 const returnCycleWordOrder = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/cycleWordOrder')
 const returnVisitList = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/list')
-
+const returnVisitFinish = () => import(/* webpackChunkName: "returnVisit" */ 'base/returnVisit/finish')
 // import returnVisitIndex from 'base/returnVisit/index'
 // import returnWorkOrder from 'base/returnVisit/workOrder'
 // import returnCycleWordOrder from 'base/returnVisit/cycleWordOrder'
@@ -279,19 +279,24 @@ export default new Router({
       component: returnVisitIndex,
       children: [
         {
-          path: 'workOrder',
+          path: 'workOrder/:id',
           name: 'returnWorkOrder',
           component: returnWorkOrder
         },
-        {
-          path: 'cycleWordOrder',
-          name: 'returnCycleWordOrder',
-          component: returnCycleWordOrder
-        },
+        // {
+        //   path: 'cycleWordOrder',
+        //   name: 'returnCycleWordOrder',
+        //   component: returnCycleWordOrder
+        // },
         {
           path: 'returnVisitList',
           name: 'returnVisitList',
           component: returnVisitList
+        },
+        {
+          path: 'finish',
+          name: 'returnVisitFinish',
+          component: returnVisitFinish,
         },
         {
           path: '/',

@@ -16,7 +16,7 @@
       <van-cell title="我的发票" is-link to="/invoice" icon="exchange"/>
       <van-cell title="我的文件" is-link to="/source" icon="idcard"/>
       <!-- <van-cell title="我的工单" is-link to="/source" icon="idcard"/> -->
-      <van-cell title="我的评价" is-link to="/returnVisit" icon="idcard"/>
+      <!-- <van-cell title="我的评价" is-link to="/returnVisit" icon="idcard"/> -->
       <van-cell title="关于我们" is-link to="/about" icon="info-o"/>
     </van-cell-group>
     <van-tabbar v-model="active" fixed>
