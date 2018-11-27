@@ -23,7 +23,12 @@
             <van-row style="margin-top:2px;margin-left:10px">
               <van-col>业务名称：{{wordOrderDetail[0].product_name}}</van-col>
             </van-row>
-            <van-row style="margin-top:2px" v-if="wordOrderDetail.length>1"><center>点击查看更多</center></van-row>
+            <van-row style="margin-top:2px" v-if="wordOrderDetail.length>1 && showMore == false" @click.native="open_more"><center>点击查看服务公司</center></van-row>
+            <van-row v-if="showMore">
+              <van-col span="24" v-for="(item, index) in wordOrderDetail" :key="index"><center>{{item.company_name}}</center></van-col>
+              <van-col span="24" @click.native="showMore = false"><center style='font-size:12px'>关闭</center></van-col>
+            </van-row>
+
           </van-col>
         </div>
         <!-- <van-col span="6">
@@ -76,7 +81,8 @@ export default {
           product_name: "",
           company_name: ""
         }
-      ]
+      ],
+      showMore: false
     }
   },
   computed: {
@@ -93,9 +99,12 @@ export default {
       }else{
         return false
       }
-    }
+    },
   },
   methods: {
+    open_more(){
+      this.showMore = true
+    },
     submit() {
       let _self = this
       let url = `api/store/customer/work/order/callback/update`

@@ -249,7 +249,8 @@ export default {
     },
     open_project(){
       let _self = this
-      _self.$toast.fail("方案模块正在努力开发中...")
+      window.open("http://tools.zgcfo.com/#/project/10510")
+      // _self.$toast.fail("方案模块正在努力开发中...")
       // this.$router.push({
       //   name: "project",
       //   params: {
