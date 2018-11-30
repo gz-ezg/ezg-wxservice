@@ -158,6 +158,7 @@ export default {
             break;
           }else{
             _self.workOrderList.splice(i, 1)
+            i--;
           }
         }
         // for(let i = _self.workOrderList.length - 1;i>0;i--){

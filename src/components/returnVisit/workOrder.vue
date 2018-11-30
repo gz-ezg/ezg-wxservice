@@ -68,9 +68,9 @@ export default {
     return {
       errorStatus: true,
       loading: false,
-      serviceRanks: 3,
-      abilityRanks: 3,
-      attitudeRanks: 3,
+      serviceRanks: 5,
+      abilityRanks: 5,
+      attitudeRanks: 5,
       customerMemo: "",
       submitLoading: false,
       onlyShow: false,
