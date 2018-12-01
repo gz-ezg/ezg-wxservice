@@ -15,13 +15,13 @@
         <div>
           <van-col span="24">
             <van-row style="margin-left:10px">
-              <van-col>服务人员：<span>{{wordOrderDetail[0].server_name}}</span></van-col>
+              <van-col span="7">服务人员：</van-col><van-col span="17"><span>{{wordOrderDetail[0].server_name}}</span></van-col>
             </van-row>
             <van-row style="margin-top:2px;margin-left:10px">
-              <van-col>联系方式：{{wordOrderDetail[0].server_tel}}</van-col>
+              <van-col span="7">联系方式：</van-col><van-col span="17">{{wordOrderDetail[0].server_tel}}</van-col>
             </van-row>
             <van-row style="margin-top:2px;margin-left:10px">
-              <van-col>业务名称：{{wordOrderDetail[0].product_name}}</van-col>
+              <van-col span="7">业务名称：</van-col><van-col span="17"><span style="font-size:16px;font-weight:bolder">{{wordOrderDetail[0].product_name}}</span></van-col>
             </van-row>
             <van-row style="margin-top:2px" v-if="wordOrderDetail.length>1 && showMore == false" @click.native="open_more"><center>点击查看服务公司</center></van-row>
             <van-row v-if="showMore">
@@ -37,21 +37,30 @@
       </van-row>
     <!-- </van-row> -->
       <van-row style="margin:20px;padding:20px;padding-bottom:60px;">
-        <van-row type="flex" align="center" style="margin-top:5px">
+        <van-row type="flex" align="center" style="margin-top:20px">
           <van-col span="8"><span class="rate-text">服务效率：</span></van-col>
-          <van-col span="16"><van-rate v-model="serviceRanks" :size="24" :readonly="onlyShow"/></van-col>
+          <van-col span="16"><van-slider v-model="serviceRanks" :step="10" bar-height="8px" class="item" :disabled="onlyShow"/></van-col>
+          <!-- <van-col span="16"><van-rate v-model="serviceRanks" :size="24" :readonly="onlyShow"/></van-col> -->
         </van-row>
-        <van-row type="flex" align="center" style="margin-top:5px">
+        <van-row type="flex" align="center" style="margin-top:20px">
           <van-col span="8"><span class="rate-text">服务态度：</span></van-col>
-          <van-col span="16"><van-rate v-model="attitudeRanks" :size="24" :readonly="onlyShow"/></van-col>
+          <van-col span="16"><van-slider v-model="attitudeRanks" :step="10" bar-height="8px" class="item" :disabled="onlyShow"/></van-col>
+          <!-- <van-col span="16"><van-rate v-model="attitudeRanks" :size="24" :readonly="onlyShow"/></van-col> -->
         </van-row>
-        <van-row type="flex" align="center" style="margin-top:5px">
+        <van-row type="flex" align="center" style="margin-top:20px">
           <van-col span="8"><span class="rate-text">服务能力：</span></van-col>
-          <van-col span="16"><van-rate v-model="abilityRanks" :size="24" :readonly="onlyShow"/></van-col>
+          <van-col span="16"><van-slider v-model="abilityRanks" :step="10" bar-height="8px" class="item" :disabled="onlyShow"/></van-col>
+          <!-- <van-col span="16"><van-rate v-model="abilityRanks" :size="24" :readonly="onlyShow"/></van-col> -->
         </van-row>
         <van-row style="margin-top:30px" v-if="show_memo">
           <van-field rows="6" type="textarea" placeholder="吐个槽！" v-model="customerMemo" :readonly="onlyShow"></van-field>
         </van-row>
+        <!-- <slider v-model="abilityRanks" :step="10" bar-height="8px" class="item">
+          <div slot="icon" style="display:flex;justify-content:center;align-items:center">
+            <van-icon name="close" v-if="abilityRanks>70"></van-icon>
+            <van-icon name="success" v-if="abilityRanks<=70"></van-icon>
+          </div>
+        </slider> -->
         <van-row style="margin-top:30px" v-show="show_share">
           <center>
             <van-button type="warning">好服务记得要分享</van-button>
@@ -63,14 +72,19 @@
 </template>
 
 <script>
+// import slider from 'vant/packages/slider/index'
+
 export default {
+  // components: {
+  //  slider 
+  // },
   data() {
     return {
       errorStatus: true,
       loading: false,
-      serviceRanks: 5,
-      abilityRanks: 5,
-      attitudeRanks: 5,
+      serviceRanks: 50,
+      abilityRanks: 50,
+      attitudeRanks: 50,
       customerMemo: "",
       submitLoading: false,
       onlyShow: false,
@@ -87,14 +101,14 @@ export default {
   },
   computed: {
     show_share() {
-      if(this.serviceRanks > 2 || this.abilityRanks > 2 || this.attitudeRanks > 2){
+      if(this.serviceRanks > 40 || this.abilityRanks > 40 || this.attitudeRanks > 40){
         return true
       }else{
         return false
       }
     },
     show_memo(){
-      if(this.serviceRanks <= 2 || this.abilityRanks <= 2 || this.attitudeRanks <= 2){
+      if(this.serviceRanks <= 40 || this.abilityRanks <= 40 || this.attitudeRanks <= 40){
         return true
       }else{
         return false
@@ -112,9 +126,9 @@ export default {
 
       let config = {
         id: _self.$route.params.id,
-        serviceRanks: _self.serviceRanks *2,
-        abilityRanks: _self.abilityRanks *2,
-        attitudeRanks: _self.attitudeRanks *2,
+        serviceRanks: _self.serviceRanks/10,
+        abilityRanks: _self.abilityRanks/10,
+        attitudeRanks: _self.attitudeRanks/10,
         customerMemo: _self.customerMemo
       }
 
@@ -147,9 +161,9 @@ export default {
         console.log(res.data.data)
         if(res.data.data.callback_status == "Y"){
           _self.onlyShow = true
-          _self.serviceRanks = res.data.data.service_ranks/2
-          _self.abilityRanks = res.data.data.ability_ranks/2
-          _self.attitudeRanks = res.data.data.attitude_ranks/2
+          _self.serviceRanks = res.data.data.service_ranks*10,
+          _self.abilityRanks = res.data.data.ability_ranks*10,
+          _self.attitudeRanks = res.data.data.attitude_ranks*10,
           _self.customerMemo = res.data.data.customer_memo
         }else{
           _self.onlyShow = false
@@ -182,9 +196,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .rate-text{
   font-size:16px;
   line-height: 16px;
 }
+.van-slider__bar{
+  background-color: #FF4500!important
+}
+/* .van-slider__button{
+  background-color: #FF4500!important
+} */
 </style>
