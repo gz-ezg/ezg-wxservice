@@ -76,15 +76,15 @@
 
 export default {
   // components: {
-  //  slider 
+  //  slider
   // },
   data() {
     return {
       errorStatus: true,
       loading: false,
-      serviceRanks: 50,
-      abilityRanks: 50,
-      attitudeRanks: 50,
+      serviceRanks: 0,
+      abilityRanks: 0,
+      attitudeRanks: 0,
       customerMemo: "",
       submitLoading: false,
       onlyShow: false,
