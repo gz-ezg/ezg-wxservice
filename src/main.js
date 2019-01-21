@@ -20,14 +20,14 @@ Vue.use(VueBus)
 
 let host
 
-if(process.env.NODE_ENV === 'production'){
-  host = 'http://m2.zgcfo.com'
-}else if (process.env.NODE_ENV === 'jenkins'){
-  host = 'http://m2.roderickt1an.cn'
-}else{
-  // host = 'http://192.168.0.226:8100'
-  host = 'http://192.168.1.12:8100'
-}
+// if(process.env.NODE_ENV === 'production'){
+//   host = 'http://m2.zgcfo.com'
+// }else if (process.env.NODE_ENV === 'jenkins'){
+//   host = 'http://m2.roderickt1an.cn'
+// }else{
+//   // host = 'http://192.168.0.226:8100'
+//   host = 'http://192.168.1.12:8100'
+// }
 const instance = axios.create({
   baseURL: host
 })

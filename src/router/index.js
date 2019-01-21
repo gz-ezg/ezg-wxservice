@@ -100,7 +100,8 @@ const aboutIndex = () => import(/* webpackChunkName: "myCenter" */ 'base/about/i
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  // mode:'history',
+  mode: process.env.NODE_ENV === 'production'? "history": "hash",
   routes: [
     // {
     //   path: '/',
